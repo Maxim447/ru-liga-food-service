@@ -3,8 +3,6 @@ package ru.liga.orderservice.service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.liga.orderservice.dto.OrderConfirmationDto;
 import ru.liga.orderservice.dto.OrderCreationDto;
 import ru.liga.orderservice.dto.OrderDTO;
@@ -26,12 +24,12 @@ public class OrderService {
     }
 
     @Operation(summary = "Получить заказ по id")
-    public OrderDTO getOrderById(@PathVariable Long id) {
+    public OrderDTO getOrderById(Long id) {
         return new OrderDTO(id, new Restaurant("Dodo Pizza"), List.of(new Items(980.00, 1, "Big Pizza", "There will be in the future")));
     }
 
     @Operation(summary = "Создать новый заказ")
-    public OrderConfirmationDto createOrder(@RequestBody OrderCreationDto orderCreationDto) {
+    public OrderConfirmationDto createOrder(OrderCreationDto orderCreationDto) {
         return new OrderConfirmationDto(1L, "https://secretPaymentUrl.com", "12:00");
     }
 }
