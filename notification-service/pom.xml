@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>dependency_bom</artifactId>
+		<artifactId>dependency-bom</artifactId>
 		<groupId>ru.liga</groupId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../dependency_bom/pom.xml</relativePath>
+		<relativePath>../dependency-bom/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>notification-service</artifactId>
