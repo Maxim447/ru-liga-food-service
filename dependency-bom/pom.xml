@@ -4,9 +4,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <version>0.0.1-SNAPSHOT</version>
-    <groupId>ru.liga</groupId>
     <artifactId>dependency_bom</artifactId>
     <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>food-service</artifactId>
+        <groupId>ru.liga</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
     <properties>
         <spring.version>2.7.15</spring.version>
