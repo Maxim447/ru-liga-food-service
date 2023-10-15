@@ -3,12 +3,10 @@ package ru.liga.orderservice.service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Service;
-import ru.liga.orderservice.dto.OrderConfirmationDto;
-import ru.liga.orderservice.dto.OrderCreationDto;
-import ru.liga.orderservice.dto.OrderDTO;
-import ru.liga.orderservice.model.Items;
-import ru.liga.orderservice.model.Restaurant;
+import ru.liga.orderservice.dto.*;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Schema(description = "Сервис для оформления заказов")
@@ -16,20 +14,22 @@ import java.util.List;
 public class OrderService {
 
     @Operation(summary = "Получить все заказы")
-    public List<OrderDTO> getOrders() {
-        return List.of(
-                new OrderDTO(1L, new Restaurant("Dodo Pizza"), List.of(new Items(980.00, 1, "Big Pizza", "There will be in the future"))),
-                new OrderDTO(2L, new Restaurant("SPAR"), List.of(new Items(100.00, 2, "Something", "There will be in the future")))
+    public GetOrdersResponseDTO getOrders() {
+        return new GetOrdersResponseDTO(List.of(
+                new OrderDTO(1L, new RestaurantDTO("Dodo Pizza"), Date.from(Instant.now()), List.of(new ItemsDTO(980.00, 1, "Big Pizza", "There will be in the future"))),
+                new OrderDTO(2L, new RestaurantDTO("SPAR"), Date.from(Instant.now()), List.of(new ItemsDTO(100.00, 2, "Something", "There will be in the future")))),
+                1,
+                10
         );
     }
 
     @Operation(summary = "Получить заказ по id")
     public OrderDTO getOrderById(Long id) {
-        return new OrderDTO(id, new Restaurant("Dodo Pizza"), List.of(new Items(980.00, 1, "Big Pizza", "There will be in the future")));
+        return new OrderDTO(id, new RestaurantDTO("Dodo Pizza"), Date.from(Instant.now()), List.of(new ItemsDTO(980.00, 1, "Big Pizza", "There will be in the future")));
     }
 
     @Operation(summary = "Создать новый заказ")
-    public OrderConfirmationDto createOrder(OrderCreationDto orderCreationDto) {
-        return new OrderConfirmationDto(1L, "https://secretPaymentUrl.com", "12:00");
+    public OrderConfirmationDTO createOrder(OrderCreationDTO orderCreationDto) {
+        return new OrderConfirmationDTO(1L, "https://secretPaymentUrl.com", Date.from(Instant.now().plusSeconds(100)));
     }
 }

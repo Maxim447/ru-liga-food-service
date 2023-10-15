@@ -1,5 +1,4 @@
-package ru.liga.orderservice.model;
-
+package ru.liga.orderservice.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -7,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Items {
+public class ItemsDTO {
 
     @Schema(description = "Цена")
     private Double price;
@@ -18,6 +17,6 @@ public class Items {
     @Schema(description = "Описание")
     private String description;
 
-    @Schema(description = "Картинка")
+    @Schema(description = "Картика")
     private String image;
 }

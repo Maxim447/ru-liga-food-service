@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.liga.deliveryservice.model.Customer;
-import ru.liga.deliveryservice.model.Restaurant;
 
 @Schema(description = "DTO доставок")
 @Data
@@ -18,10 +16,10 @@ public class DeliveryDTO {
     private Long orderId;
 
     @Schema(description = "Ресторан")
-    private Restaurant restaurant;
+    private RestaurantDTO restaurant;
 
     @Schema(description = "Заказчик")
-    private Customer customer;
+    private CustomerDTO customer;
 
     @Schema(description = "Способ оплаты")
     private String payment;

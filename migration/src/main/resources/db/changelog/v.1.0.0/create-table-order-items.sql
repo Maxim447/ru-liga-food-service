@@ -1,0 +1,20 @@
+CREATE SEQUENCE IF NOT EXISTS order_items_seq;
+
+CREATE TABLE IF NOT EXISTS order_items
+(
+    id bigint not null default nextval('order_items_seq'),
+    order_id bigint not null,
+    restaurant_menu_item bigint not null,
+    price int not null,
+    quantity int not null,
+    constraint order_items_pk primary key (id),
+    constraint order_fk foreign key(order_id) references orders(id),
+    constraint order_items_restaurant_menu_items_fk foreign key (restaurant_menu_item) references restaurant_menu_items(id)
+);
+
+comment on table order_items is 'Позиции в заказе';
+comment on column order_items.id is 'Идентификатор позиции';
+comment on column order_items.order_id is 'Идентификатор заказа';
+comment on column order_items. restaurant_menu_item is 'Идентификатор позиции в меню';
+comment on column order_items.price is 'Цена';
+comment on column order_items.price is 'Количество';

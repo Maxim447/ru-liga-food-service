@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.liga.deliveryservice.dto.ActionDTO;
-import ru.liga.deliveryservice.dto.DeliveryDTO;
-import ru.liga.deliveryservice.model.Customer;
-import ru.liga.deliveryservice.model.Restaurant;
+import ru.liga.deliveryservice.dto.*;
 
 import java.util.List;
 
@@ -18,10 +15,12 @@ import java.util.List;
 public class DeliveryService {
 
     @Operation(summary = "Получить все доставки")
-    public List<DeliveryDTO> getDeliveries(String status) {
-        return List.of(
-                new DeliveryDTO(1L, new Restaurant("Moskovskay", "1 kilometers"), new Customer("Nizhnia", "500 meters"), "card"),
-                new DeliveryDTO(2L, new Restaurant("Nizhnia", "150 meters"), new Customer("Moskovskay", "2.3 kilometers"), "card")
+    public GetDeliveriesResponseDTO getDeliveries(String status) {
+        return new GetDeliveriesResponseDTO(List.of(
+                new DeliveryDTO(1L, new RestaurantDTO("Moskovskay", 1000.0), new CustomerDTO("Nizhnia", 500.0), "card"),
+                new DeliveryDTO(2L, new RestaurantDTO("Nizhnia", 150.0), new CustomerDTO("Moskovskay", 2300.0), "card")),
+                1,
+                10
         );
     }
 
