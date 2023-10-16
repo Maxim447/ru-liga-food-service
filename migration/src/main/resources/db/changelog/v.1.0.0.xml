@@ -9,7 +9,10 @@
         <sqlFile path="v.1.0.0/create-table-customers.sql" relativeToChangelogFile="true"/>
         <sqlFile path="v.1.0.0/create-table-restaurants.sql" relativeToChangelogFile="true"/>
         <sqlFile path="v.1.0.0/create-table-orders.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="v.1.0.0/create-table-order-items.sql" relativeToChangelogFile="true"/>
         <sqlFile path="v.1.0.0/create-table-restaurant-menu-items.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v.1.0.0/create-table-order-items.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="v.1.0.0/rollback/init_rollback.sql" relativeToChangelogFile="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

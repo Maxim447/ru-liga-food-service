@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS order_items
     price int not null,
     quantity int not null,
     constraint order_items_pk primary key (id),
-    constraint order_fk foreign key(order_id) references orders(id)
+    constraint order_fk foreign key(order_id) references orders(id),
+    constraint order_items_restaurant_menu_items_fk foreign key (restaurant_menu_item) references restaurant_menu_items(id)
 );
 
 comment on table order_items is 'Позиции в заказе';
