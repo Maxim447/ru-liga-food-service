@@ -3,9 +3,9 @@ package ru.liga.orderservice.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.liga.orderservice.model.Items;
-import ru.liga.orderservice.model.Restaurant;
 
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,9 +18,12 @@ public class OrderDTO {
     private Long id;
 
     @Schema(description = "Ресторан")
-    private Restaurant restaurant;
+    private RestaurantDTO restaurant;
+
+    @Schema(description = "Время")
+    private Date timestamp;
 
     @Schema(description = "Список товаров в заказе")
-    private List<Items> items;
+    private List<ItemsDTO> items;
 }
 
