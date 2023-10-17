@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.deliveryservice.dto.ActionDTO;
-import ru.liga.deliveryservice.dto.DeliveryDTO;
+import ru.liga.deliveryservice.dto.GetDeliveriesResponseDTO;
 import ru.liga.deliveryservice.service.DeliveryService;
-
-import java.util.List;
 
 @Tag(name = "API для отправки заказов курьерам")
 @RestController
@@ -28,7 +26,7 @@ public class DeliveryController {
 
     @Operation(summary = "Получить все доставки")
     @GetMapping("/deliveries")
-    public List<DeliveryDTO> getDeliveries(@RequestParam("status") String status) {
+    public GetDeliveriesResponseDTO getDeliveries(@RequestParam("status") String status) {
         return deliveryService.getDeliveries(status);
     }
 
