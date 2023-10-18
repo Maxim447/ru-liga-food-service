@@ -1,6 +1,9 @@
-package ru.liga.entity;
+package ru.liga.orderservice.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -26,7 +29,7 @@ public class OrderItem {
     private RestaurantMenuItem restaurantMenuItem;
 
     @Column(name = "price", nullable = false)
-    private Long price;
+    private Integer price;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

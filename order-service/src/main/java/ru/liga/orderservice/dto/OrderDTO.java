@@ -1,10 +1,10 @@
-package ru.liga.dto;
+package ru.liga.orderservice.dto;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.List;
 @Schema(description = "DTO для получения заказа")
 @Data
 @AllArgsConstructor
+@Builder
 public class OrderDTO {
 
     @Schema(description = "Id заказа")

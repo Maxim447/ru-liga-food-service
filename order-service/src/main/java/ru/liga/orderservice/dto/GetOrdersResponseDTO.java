@@ -1,18 +1,20 @@
-package ru.liga.dto;
+package ru.liga.orderservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class GetKitchenOrdersResponseDTO {
+@Builder
+public class GetOrdersResponseDTO {
 
     @Schema(description = "Заказы")
-    private List<KitchenOrderDTO> orders;
+    private List<OrderDTO> orders;
 
     @Schema(description = "Индекс страницы")
     @JsonProperty("page_index")

@@ -1,9 +1,13 @@
-package ru.liga.entity;
+package ru.liga.orderservice.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -34,5 +38,8 @@ public class Order {
     private Courier courierId;
 
     @Column(name = "timestamp", nullable = false)
-    private Date timestamp;
+    private Timestamp timestamp;
+
+    @OneToMany(mappedBy = "orderId")
+    private List<OrderItem> items;
 }
