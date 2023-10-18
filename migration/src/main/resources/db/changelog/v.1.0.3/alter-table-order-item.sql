@@ -1,0 +1,2 @@
+ALTER TABLE order_items
+    ALTER COLUMN price TYPE NUMERIC(10,2);

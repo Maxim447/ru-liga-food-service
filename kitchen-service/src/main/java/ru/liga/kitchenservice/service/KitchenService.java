@@ -2,24 +2,26 @@ package ru.liga.kitchenservice.service;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.liga.kitchenservice.dto.GetOrdersResponseDTO;
-import ru.liga.kitchenservice.dto.MenuItemsDTO;
-import ru.liga.kitchenservice.dto.OrderDTO;
+import ru.liga.dto.GetKitchenOrdersResponseDTO;
+import ru.liga.entity.Order;
+import ru.liga.kitchenservice.mapper.OrderMapper;
+import ru.liga.kitchenservice.repository.OrderRepository;
 
 import java.util.List;
 
 @Schema(description = "Сервис для приема заказов на кухню")
+@RequiredArgsConstructor
 @Service
 public class KitchenService {
 
+    private final OrderRepository orderRepository;
+
     @Operation(summary = "Получить все заказы")
-    public GetOrdersResponseDTO getOrders(String status) {
-        return new GetOrdersResponseDTO(List.of(
-                new OrderDTO(1L, List.of(new MenuItemsDTO(10, 1))),
-                new OrderDTO(2L, List.of(new MenuItemsDTO(1, 2)))),
-                1,
-                10
-        );
+    public GetKitchenOrdersResponseDTO getOrdersByStatus(String status, PageRequest pageRequest) {
+        List<Order> orders = orderRepository.getOrdersByStatus(status, pageRequest);
+        return new GetKitchenOrdersResponseDTO(OrderMapper.mapToDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 }

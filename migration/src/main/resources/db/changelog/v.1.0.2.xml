@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="add-tag-1.0.2" author="maximSalyaev">
+        <sqlFile path="v.1.0.2/add-column-coordinates-to-couriers.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v.1.0.2/add-column-coordinates-to-customers.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v.1.0.2/add-column-coordinates-to-restaurant.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v.1.0.2/add-column-name-to-restaurant.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v.1.0.2/update-name-for-existing-restaurants.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="v.1.0.2/rollback/rollback.sql" relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

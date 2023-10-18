@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS orders(
     restaurant_id bigint not null,
     status varchar(32) not null,
     courier_id bigint,
-    timestamp date not null,
+    timestamp timestamp not null,
     constraint order_pk primary key (id),
     constraint customer_fk foreign key(customer_id) references customers(id),
     constraint restaurant_fk foreign key(restaurant_id) references restaurants(id),

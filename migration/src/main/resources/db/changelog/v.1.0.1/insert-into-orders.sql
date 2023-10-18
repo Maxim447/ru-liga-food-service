@@ -1,5 +1,26 @@
 INSERT INTO orders (id, customer_id, restaurant_id, status, courier_id, timestamp)
 VALUES
     (1, 1, 1, 'active', 1, now()),
-    (2, 2, 2, 'delivered', 2, now())
-;
+    (2, 2, 2, 'active', 1, now()),
+    (3, 3, 3, 'complete', 1, now()),
+    (4, 1, 4, 'active', 2, now()),
+    (5, 2, 5, 'active', 2, now()),
+    (6, 2, 1, 'complete', 2, now()),
+    (7, 6, 1, 'active',  2, now()),
+    (8, 3, 2, 'active', 3, now()),
+    (9, 4, 2, 'complete', 3, now()),
+    (10, 5, 3, 'active', 3, now()),
+    (11, 6, 3, 'active', 3, now()),
+    (12, 1, 4, 'complete', 1, now()),
+    (13, 7, 4, 'active', 2, now()),
+    (14, 8, 5, 'active', 3, now()),
+    (15, 5, 5, 'complete', 1, now()),
+    (16, 7, 1, 'active', 2, now()),
+    (17, 9, 2, 'active', 1, now()),
+    (18, 10, 3, 'complete', 1, now()),
+    (19, 9, 5, 'active', 3, now()),
+    (20, 8, 5, 'active', 3, now()),
+    (21, 7, 5, 'complete', 1, now()),
+    (22, 5, 3, 'active', 3, now()),
+    (23, 4, 3, 'active', 2, now()),
+    (24, 2, 1, 'complete', 2, now());

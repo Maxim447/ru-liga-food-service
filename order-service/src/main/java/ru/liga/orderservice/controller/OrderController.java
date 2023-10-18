@@ -5,12 +5,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.GetOrdersResponseDTO;
-import ru.liga.orderservice.dto.OrderConfirmationDTO;
-import ru.liga.orderservice.dto.OrderCreationDTO;
-import ru.liga.orderservice.dto.OrderDTO;
+import ru.liga.dto.*;
 import ru.liga.orderservice.service.OrderService;
+
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 
 @Tag(name = "API для оформления заказов")
@@ -24,8 +25,9 @@ public class OrderController {
 
     @Operation(summary = "Получить все заказы")
     @GetMapping("/")
-    private GetOrdersResponseDTO getOrders() {
-        return orderService.getOrders();
+    private GetOrdersResponseDTO getAllOrders(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+            @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
+        return orderService.getAllOrders(PageRequest.of(pageIndex, pageCount));
     }
 
     @Operation(summary = "Получить заказ по id")
