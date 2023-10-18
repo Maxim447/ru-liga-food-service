@@ -2,33 +2,43 @@ package ru.liga.deliveryservice.service;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.deliveryservice.dto.*;
+import ru.liga.deliveryservice.entity.Order;
+import ru.liga.deliveryservice.mapper.DeliveryMapper;
+import ru.liga.deliveryservice.repository.OrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Schema(description = "Сервис для отправки заказов курьерам")
+@RequiredArgsConstructor
 @Service
 public class DeliveryService {
 
+    private final OrderRepository orderRepository;
+
     @Operation(summary = "Получить все доставки")
     public GetDeliveriesResponseDTO getDeliveries(String status) {
-        return new GetDeliveriesResponseDTO(List.of(
-                new DeliveryDTO(1L, new RestaurantDTO("Moskovskay", 1000.0), new CustomerDTO("Nizhnia", 500.0), "card"),
-                new DeliveryDTO(2L, new RestaurantDTO("Nizhnia", 150.0), new CustomerDTO("Moskovskay", 2300.0), "card")),
-                1,
-                10
-        );
+        List<Order> orders = orderRepository.getAllByStatus(status);
+        return new GetDeliveriesResponseDTO(DeliveryMapper.mapToDto(orders), 1, 10);
     }
 
     @Operation(summary = "Создать доставку")
-    public ResponseEntity<?> createDelivery(Long id, ActionDTO actionDTO) {
+    public ResponseEntity<?> setDeliveryAction(Long id, ActionDTO actionDTO) {
+        Order order = orderRepository.getOrderById(id).orElseThrow();
         switch (actionDTO.getOrderAction()) {
-            case "accept":
-            case "completed":
+            case "active":
+                order.setStatus(DeliveryStatus.active.toString());
+                orderRepository.save(order);
+                return new ResponseEntity<>(HttpStatus.OK);
+            case "complete":
+                order.setStatus(DeliveryStatus.complete.toString());
+                orderRepository.save(order);
                 return new ResponseEntity<>(HttpStatus.OK);
             default:
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
