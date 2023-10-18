@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.GetOrdersResponseDTO;
-import ru.liga.orderservice.dto.OrderConfirmationDTO;
-import ru.liga.orderservice.dto.OrderCreationDTO;
-import ru.liga.orderservice.dto.OrderDTO;
+import ru.liga.orderservice.dto.*;
 import ru.liga.orderservice.service.OrderService;
 
 

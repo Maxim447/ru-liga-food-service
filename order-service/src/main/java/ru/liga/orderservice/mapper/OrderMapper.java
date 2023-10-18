@@ -11,11 +11,10 @@ import ru.liga.orderservice.entity.Order;
 public class OrderMapper {
 
     public static OrderDTO mapToDto(Order order, RestaurantDTO restaurantDto) {
-        OrderDTO orderDTO = OrderDTO.builder()
+        return OrderDTO.builder()
                 .id(order.getId())
                 .restaurant(restaurantDto)
                 .timestamp(order.getTimestamp())
                 .build();
-        return orderDTO;
     }
 }
