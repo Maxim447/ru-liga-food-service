@@ -3,9 +3,9 @@ package ru.liga.kitchenservice.service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Service;
-import ru.liga.kitchenservice.dto.GetOrdersResponseDTO;
-import ru.liga.kitchenservice.dto.MenuItemsDTO;
-import ru.liga.kitchenservice.dto.OrderDTO;
+import ru.liga.dto.GetOrdersResponseDTO;
+import ru.liga.dto.MenuItemsDTO;
+import ru.liga.dto.KitchenOrderDTO;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class KitchenService {
     @Operation(summary = "Получить все заказы")
     public GetOrdersResponseDTO getOrders(String status) {
         return new GetOrdersResponseDTO(List.of(
-                new OrderDTO(1L, List.of(new MenuItemsDTO(10, 1))),
-                new OrderDTO(2L, List.of(new MenuItemsDTO(1, 2)))),
+                new KitchenOrderDTO(1L, List.of(new MenuItemsDTO(10, 1))),
+                new KitchenOrderDTO(2L, List.of(new MenuItemsDTO(1, 2)))),
                 1,
                 10
         );

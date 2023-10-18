@@ -3,7 +3,7 @@ package ru.liga.orderservice.service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.stereotype.Service;
-import ru.liga.orderservice.dto.*;
+import ru.liga.dto.*;
 
 import java.time.Instant;
 import java.util.Date;

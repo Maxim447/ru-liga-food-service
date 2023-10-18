@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.GetOrdersResponseDTO;
-import ru.liga.orderservice.dto.OrderConfirmationDTO;
-import ru.liga.orderservice.dto.OrderCreationDTO;
-import ru.liga.orderservice.dto.OrderDTO;
+import ru.liga.dto.GetOrdersResponseDTO;
+import ru.liga.dto.OrderConfirmationDTO;
+import ru.liga.dto.OrderCreationDTO;
+import ru.liga.dto.OrderDTO;
 import ru.liga.orderservice.service.OrderService;
 
 

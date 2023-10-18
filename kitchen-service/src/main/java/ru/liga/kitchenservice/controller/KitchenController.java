@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.liga.kitchenservice.dto.GetOrdersResponseDTO;
+import ru.liga.dto.GetOrdersResponseDTO;
 import ru.liga.kitchenservice.service.KitchenService;
 
 @Tag(name = "API для работы с рестараном")

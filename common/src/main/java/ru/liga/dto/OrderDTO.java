@@ -1,4 +1,5 @@
-package ru.liga.orderservice.dto;
+package ru.liga.dto;
+
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -26,4 +27,3 @@ public class OrderDTO {
     @Schema(description = "Список товаров в заказе")
     private List<ItemsDTO> items;
 }
-

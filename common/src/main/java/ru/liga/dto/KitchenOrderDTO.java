@@ -1,5 +1,4 @@
-package ru.liga.kitchenservice.dto;
-
+package ru.liga.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class OrderDTO {
+public class KitchenOrderDTO {
 
     @Schema(description = "Id заказа")
     private Long id;

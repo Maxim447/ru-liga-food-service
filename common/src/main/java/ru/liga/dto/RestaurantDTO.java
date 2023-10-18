@@ -1,4 +1,4 @@
-package ru.liga.deliveryservice.dto;
+package ru.liga.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -14,4 +14,9 @@ public class RestaurantDTO {
 
     @Schema(description = "Расстояние")
     private Double distance;
+
+
+    public RestaurantDTO(String address) {
+        this.address = address;
+    }
 }
