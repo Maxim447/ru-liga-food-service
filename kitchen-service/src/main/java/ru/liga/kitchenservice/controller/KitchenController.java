@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.liga.dto.GetKitchenOrdersResponseDTO;
+import ru.liga.kitchenservice.dto.GetOrdersResponseDTO;
 import ru.liga.kitchenservice.service.KitchenService;
 
 @Tag(name = "API для работы с рестараном")
@@ -23,7 +23,7 @@ public class KitchenController {
 
     @Operation(summary = "Получить все заказы")
     @GetMapping("/orders")
-    public GetKitchenOrdersResponseDTO getOrders(@RequestParam(value = "status") String status) {
+    public GetOrdersResponseDTO getOrders(@RequestParam(value = "status") String status) {
         return kitchenService.getOrders(status);
     }
 }

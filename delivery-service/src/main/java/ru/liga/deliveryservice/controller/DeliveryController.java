@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.dto.ActionDTO;
-import ru.liga.dto.GetDeliveriesResponseDTO;
+import ru.liga.deliveryservice.dto.ActionDTO;
+import ru.liga.deliveryservice.dto.GetDeliveriesResponseDTO;
 import ru.liga.deliveryservice.service.DeliveryService;
 
 @Tag(name = "API для отправки заказов курьерам")

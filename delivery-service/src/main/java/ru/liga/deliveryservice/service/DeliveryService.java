@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.liga.dto.*;
+import ru.liga.deliveryservice.dto.*;
 
 import java.util.List;
 
