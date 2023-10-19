@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.deliveryservice.dto.ActionDTO;
@@ -23,8 +24,10 @@ public class DeliveryController {
 
     @Operation(summary = "Получить все доставки")
     @GetMapping("/deliveries")
-    public GetDeliveriesResponseDTO getDeliveries(@RequestParam("status") String status) {
-        return deliveryService.getDeliveries(status);
+    public GetDeliveriesResponseDTO getDeliveriesByStatus(@RequestParam("status") String status,
+            @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+            @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
+        return deliveryService.getDeliveriesByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
 
     @Operation(summary = "Создать доставку")
