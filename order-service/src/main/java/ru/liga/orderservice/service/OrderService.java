@@ -3,7 +3,8 @@ package ru.liga.orderservice.service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.liga.orderservice.dto.*;
 import ru.liga.orderservice.entity.Order;
@@ -25,8 +26,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Operation(summary = "Получить все заказы")
-    public GetOrdersResponseDTO getOrders() {
-        List<Order> orders = orderRepository.findAll();
+    public GetOrdersResponseDTO getAllOrders(PageRequest pageRequest) {
+        Page<Order> orders = orderRepository.findAll(pageRequest);
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orders) {
             List<ItemsDTO> items = new ArrayList<>();
@@ -38,7 +39,7 @@ public class OrderService {
             orderDTO.setItems(items);
             orderDTOList.add(orderDTO);
         }
-        return new GetOrdersResponseDTO(orderDTOList, 1, 10);
+        return new GetOrdersResponseDTO(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
     @Operation(summary = "Получить заказ по id")
