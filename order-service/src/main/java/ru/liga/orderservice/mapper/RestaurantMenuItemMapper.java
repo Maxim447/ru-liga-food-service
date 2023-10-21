@@ -1,8 +1,8 @@
 package ru.liga.orderservice.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.liga.orderservice.dto.RestaurantMenuItemsDTO;
-import ru.liga.orderservice.entity.RestaurantMenuItem;
+import ru.liga.dto.RestaurantMenuItemsDTO;
+import ru.liga.entity.RestaurantMenuItem;
 
 @UtilityClass
 

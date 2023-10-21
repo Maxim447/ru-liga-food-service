@@ -1,8 +1,8 @@
 package ru.liga.orderservice.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.liga.orderservice.dto.ItemsDTO;
-import ru.liga.orderservice.entity.OrderItem;
+import ru.liga.dto.ItemsDTO;
+import ru.liga.entity.OrderItem;
 
 @UtilityClass
 public class ItemMapper {

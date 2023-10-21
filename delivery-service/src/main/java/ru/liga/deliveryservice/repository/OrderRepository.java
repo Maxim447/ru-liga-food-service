@@ -3,8 +3,7 @@ package ru.liga.deliveryservice.repository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.liga.deliveryservice.dto.DeliveryStatus;
-import ru.liga.deliveryservice.entity.Order;
+import ru.liga.entity.Order;
 
 import java.util.List;
 import java.util.Optional;

@@ -3,7 +3,7 @@ package ru.liga.orderservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.RestaurantMenuItemsDTO;
+import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.orderservice.service.RestaurantMenuItemService;
 
 @RestController

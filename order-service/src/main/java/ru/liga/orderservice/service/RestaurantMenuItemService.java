@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.liga.orderservice.dto.RestaurantMenuItemsDTO;
-import ru.liga.orderservice.entity.RestaurantMenuItem;
+import ru.liga.dto.RestaurantMenuItemsDTO;
+import ru.liga.entity.RestaurantMenuItem;
 import ru.liga.orderservice.mapper.RestaurantMenuItemMapper;
 import ru.liga.orderservice.repository.RestaurantMenuItemRepository;
 

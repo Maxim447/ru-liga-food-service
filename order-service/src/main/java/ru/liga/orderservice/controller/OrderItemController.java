@@ -3,7 +3,7 @@ package ru.liga.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.ItemsDTO;
+import ru.liga.dto.ItemsDTO;
 import ru.liga.orderservice.service.OrderItemService;
 
 @RestController

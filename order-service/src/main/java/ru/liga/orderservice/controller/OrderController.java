@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.orderservice.dto.*;
+import ru.liga.dto.*;
 import ru.liga.orderservice.service.OrderService;
 
 import javax.validation.constraints.Positive;

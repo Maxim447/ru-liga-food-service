@@ -1,7 +1,7 @@
 package ru.liga.orderservice.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.liga.orderservice.dto.RestaurantDTO;
+import ru.liga.dto.RestaurantDTO;
 
 @UtilityClass
 public class RestaurantMapper {
