@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -28,7 +30,7 @@ public class OrderItem {
     private RestaurantMenuItem restaurantMenuItem;
 
     @Column(name = "price", nullable = false)
-    private Integer price;
+    private BigDecimal price;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

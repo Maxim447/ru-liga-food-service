@@ -1,12 +1,12 @@
 package ru.liga.orderservice.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.liga.dto.RestaurantDTO;
+import ru.liga.dto.CustomerRestaurantDTO;
 
 @UtilityClass
 public class RestaurantMapper {
 
-    public RestaurantDTO mapToDto(String name) {
-        return new RestaurantDTO(name);
+    public CustomerRestaurantDTO mapToDto(String name) {
+        return new CustomerRestaurantDTO(name);
     }
 }

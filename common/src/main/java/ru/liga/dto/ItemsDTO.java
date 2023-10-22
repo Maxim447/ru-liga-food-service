@@ -11,7 +11,7 @@ import lombok.Data;
 public class ItemsDTO {
 
     @Schema(description = "Цена")
-    private Integer price;
+    private Double price;
 
     @Schema(description = "Количество")
     private Integer quantity;

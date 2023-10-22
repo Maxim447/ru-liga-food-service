@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -24,4 +26,13 @@ public class Restaurant {
 
     @Column(name = "status", nullable = false)
     private String status;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "longitude", nullable = false)
+    private BigDecimal longitude;
+
+    @Column(name = "latitude", nullable = false)
+    private BigDecimal latitude;
 }

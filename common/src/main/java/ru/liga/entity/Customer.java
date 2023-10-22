@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -27,4 +29,10 @@ public class Customer {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "longitude", nullable = false)
+    private BigDecimal longitude;
+
+    @Column(name = "latitude", nullable = false)
+    private BigDecimal latitude;
 }

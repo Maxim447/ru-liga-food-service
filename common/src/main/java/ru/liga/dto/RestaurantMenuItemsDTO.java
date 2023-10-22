@@ -17,7 +17,7 @@ public class RestaurantMenuItemsDTO {
 
     private String name;
 
-    private Integer price;
+    private Double price;
 
     private String image;
 

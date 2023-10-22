@@ -21,5 +21,5 @@ public class DeliveryDTO {
     private CustomerDTO customer;
 
     @Schema(description = "Способ оплаты")
-    private String payment;
+    private Double payment;
 }

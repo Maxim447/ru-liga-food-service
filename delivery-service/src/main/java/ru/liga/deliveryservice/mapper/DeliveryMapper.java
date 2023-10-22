@@ -16,7 +16,7 @@ public class DeliveryMapper {
             deliveryDTOS.add(new DeliveryDTO(order.getId(),
                     new DeliveryRestaurantDTO(order.getRestaurantId().getAddress(), 150.0),
                     new CustomerDTO(order.getCustomerId().getAddress(), 150.0),
-                    "card"));
+                    150.0));
         }
         return deliveryDTOS;
     }

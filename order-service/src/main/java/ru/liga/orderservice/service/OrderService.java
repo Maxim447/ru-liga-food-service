@@ -32,9 +32,9 @@ public class OrderService {
         for (Order order : orders) {
             List<ItemsDTO> items = new ArrayList<>();
             OrderDTO orderDTO = OrderMapper.mapToDto(order, RestaurantMapper.mapToDto(order.getRestaurantId()
-                    .getAddress()));
+                    .getName()));
             order.getItems()
-                    .forEach(item -> items.add(new ItemsDTO(item.getPrice(), item.getQuantity(), item.getRestaurantMenuItem()
+                    .forEach(item -> items.add(new ItemsDTO(item.getPrice().doubleValue(), item.getQuantity(), item.getRestaurantMenuItem()
                             .getDescription(), item.getRestaurantMenuItem().getImage())));
             orderDTO.setItems(items);
             orderDTOList.add(orderDTO);
@@ -46,10 +46,10 @@ public class OrderService {
     public OrderDTO getOrderById(Long id) {
         Order order = orderRepository.getOrderById(id).orElseThrow();
         OrderDTO orderDTO = OrderMapper.mapToDto(order, RestaurantMapper.mapToDto(order.getRestaurantId()
-                .getAddress()));
+                .getName()));
         List<ItemsDTO> items = new ArrayList<>();
         order.getItems()
-                .forEach(item -> items.add(new ItemsDTO(item.getPrice(), item.getQuantity(), item.getRestaurantMenuItem()
+                .forEach(item -> items.add(new ItemsDTO(item.getPrice().doubleValue(), item.getQuantity(), item.getRestaurantMenuItem()
                         .getDescription(), item.getRestaurantMenuItem().getImage())));
         orderDTO.setItems(items);
 

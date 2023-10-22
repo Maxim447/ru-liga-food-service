@@ -9,6 +9,8 @@ import ru.liga.entity.RestaurantMenuItem;
 import ru.liga.orderservice.mapper.RestaurantMenuItemMapper;
 import ru.liga.orderservice.repository.RestaurantMenuItemRepository;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class RestaurantMenuItemService {
@@ -23,9 +25,9 @@ public class RestaurantMenuItemService {
         restaurantMenuItemRepository.deleteById(id);
     }
 
-    public ResponseEntity<?> changeItemPrice(Long id, Integer price) {
+    public ResponseEntity<?> changeItemPrice(Long id, Double price) {
         RestaurantMenuItem restaurantMenuItem = restaurantMenuItemRepository.getRestaurantMenuItemById(id).orElseThrow();
-        restaurantMenuItem.setPrice(price);
+        restaurantMenuItem.setPrice(BigDecimal.valueOf(price));
         restaurantMenuItemRepository.save(restaurantMenuItem);
         return new ResponseEntity<>(HttpStatus.OK);
     }

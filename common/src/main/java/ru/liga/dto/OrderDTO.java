@@ -20,7 +20,7 @@ public class OrderDTO {
     private Long id;
 
     @Schema(description = "Ресторан")
-    private RestaurantDTO restaurant;
+    private CustomerRestaurantDTO customerRestaurantDTO;
 
     @Schema(description = "Время")
     private Date timestamp;

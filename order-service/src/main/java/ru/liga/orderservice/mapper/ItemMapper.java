@@ -9,7 +9,7 @@ public class ItemMapper {
 
     public static ItemsDTO mapToDto(OrderItem orderItem) {
         return ItemsDTO.builder()
-                .price(orderItem.getPrice())
+                .price(orderItem.getPrice().doubleValue())
                 .quantity(orderItem.getQuantity())
                 .description(orderItem.getRestaurantMenuItem().getDescription())
                 .image(orderItem.getRestaurantMenuItem().getImage())

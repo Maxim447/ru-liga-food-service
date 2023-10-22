@@ -13,7 +13,7 @@ public class RestaurantMenuItemMapper {
                 .id(restaurantMenuItem.getId())
                 .restaurantId(restaurantMenuItem.getId())
                 .name(restaurantMenuItem.getName())
-                .price(restaurantMenuItem.getPrice())
+                .price(restaurantMenuItem.getPrice().doubleValue())
                 .image(restaurantMenuItem.getImage())
                 .description(restaurantMenuItem.getDescription())
                 .build();
