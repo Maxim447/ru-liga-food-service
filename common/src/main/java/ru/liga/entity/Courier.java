@@ -18,7 +18,8 @@ import java.math.BigDecimal;
 public class Courier {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "couriers_seq")
+    @SequenceGenerator(name = "couriers_seq", sequenceName = "couriers_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

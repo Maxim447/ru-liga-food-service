@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.orderservice.service.RestaurantMenuItemService;
 
-import java.math.BigDecimal;
-
 @RestController
 @RequiredArgsConstructor
 public class RestaurantMenuItemController {

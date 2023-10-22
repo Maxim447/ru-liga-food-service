@@ -17,7 +17,8 @@ import java.math.BigDecimal;
 public class RestaurantMenuItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_menu_items_seq")
+    @SequenceGenerator(name = "restaurant_menu_items_seq", sequenceName = "restaurant_menu_items_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
