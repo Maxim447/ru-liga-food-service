@@ -25,7 +25,7 @@ public class OrderController {
 
     @Operation(summary = "Получить все заказы")
     @GetMapping("/")
-    private GetOrdersResponseDTO getAllOrders(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+    private GetResponseDTO<OrderDTO> getAllOrders(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return orderService.getAllOrders(PageRequest.of(pageIndex, pageCount));
     }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ru.liga.entity.enums.RestaurantStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -26,7 +27,8 @@ public class Restaurant {
     private String address;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private RestaurantStatus status;
 
     @Column(name = "name", nullable = false)
     private String name;

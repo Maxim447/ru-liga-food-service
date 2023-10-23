@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ru.liga.entity.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -32,7 +33,8 @@ public class Order {
     private Restaurant restaurantId;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "courier_id")

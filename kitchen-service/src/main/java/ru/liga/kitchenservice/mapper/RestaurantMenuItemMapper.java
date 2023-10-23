@@ -1,11 +1,10 @@
-package ru.liga.orderservice.mapper;
+package ru.liga.kitchenservice.mapper;
 
 import lombok.experimental.UtilityClass;
 import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.entity.RestaurantMenuItem;
 
 @UtilityClass
-
 public class RestaurantMenuItemMapper {
 
     public RestaurantMenuItemsDTO mapToDto(RestaurantMenuItem restaurantMenuItem) {

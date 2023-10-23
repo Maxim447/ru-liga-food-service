@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.FullRestaurantDTO;
-import ru.liga.dto.GetRestaurantResponseDTO;
+import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.kitchenservice.service.RestaurantService;
 
@@ -24,8 +24,8 @@ public class RestaurantController {
         return restaurantService.createRestaurant(restaurantCreationDTO);
     }
 
-    @GetMapping
-    public GetRestaurantResponseDTO getRestaurants (@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+    @GetMapping("/")
+    public GetResponseDTO<FullRestaurantDTO> getRestaurants (@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return restaurantService.getRestaurants(PageRequest.of(pageIndex, pageCount));
     }

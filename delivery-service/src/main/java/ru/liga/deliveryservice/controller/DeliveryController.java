@@ -8,30 +8,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.dto.ActionDTO;
-import ru.liga.dto.GetDeliveriesResponseDTO;
+import ru.liga.dto.*;
 import ru.liga.deliveryservice.service.DeliveryService;
+import ru.liga.entity.enums.OrderStatus;
 
 @Tag(name = "API для отправки заказов курьерам")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/deliveries")
 public class DeliveryController {
 
     @Schema(description = "Сервис для отправки заказов курьерам")
     private final DeliveryService deliveryService;
 
     @Operation(summary = "Получить все доставки")
-    @GetMapping("/deliveries")
-    public GetDeliveriesResponseDTO getDeliveriesByStatus(@RequestParam("status") String status,
+    @GetMapping("/")
+    public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(@RequestParam("status") OrderStatus status,
             @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return deliveryService.getDeliveriesByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
 
-    @Operation(summary = "Создать доставку")
-    @PostMapping("/delivery/{id}")
-    public ResponseEntity<?> createDelivery(@RequestBody ActionDTO actionDTO, @PathVariable Long id) {
-        return deliveryService.setDeliveryAction(id, actionDTO);
+    @PostMapping("/{id}")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody ActionDTO actionDTO) {
+        return deliveryService.updateOrderStatus(id, actionDTO);
     }
 }

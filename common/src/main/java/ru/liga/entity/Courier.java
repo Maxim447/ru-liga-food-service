@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ru.liga.entity.enums.CourierStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -27,7 +28,8 @@ public class Courier {
     private String phone;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CourierStatus status;
 
     @Column(name = "coordinates", nullable = false)
     private String coordinates;

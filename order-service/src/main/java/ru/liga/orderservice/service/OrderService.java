@@ -26,7 +26,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Operation(summary = "Получить все заказы")
-    public GetOrdersResponseDTO getAllOrders(PageRequest pageRequest) {
+    public GetResponseDTO<OrderDTO> getAllOrders(PageRequest pageRequest) {
         Page<Order> orders = orderRepository.findAll(pageRequest);
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orders) {
@@ -39,7 +39,7 @@ public class OrderService {
             orderDTO.setItems(items);
             orderDTOList.add(orderDTO);
         }
-        return new GetOrdersResponseDTO(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
     @Operation(summary = "Получить заказ по id")

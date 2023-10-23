@@ -2,6 +2,7 @@ package ru.liga.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import ru.liga.entity.enums.RestaurantStatus;
 
 import java.math.BigDecimal;
 
@@ -14,7 +15,7 @@ public class FullRestaurantDTO {
 
     private String address;
 
-    private String status;
+    private RestaurantStatus status;
 
     private BigDecimal longitude;
 
