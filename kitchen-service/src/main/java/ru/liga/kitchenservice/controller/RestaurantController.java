@@ -24,7 +24,7 @@ public class RestaurantController {
         return restaurantService.createRestaurant(restaurantCreationDTO);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public GetRestaurantResponseDTO getRestaurants (@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return restaurantService.getRestaurants(PageRequest.of(pageIndex, pageCount));
