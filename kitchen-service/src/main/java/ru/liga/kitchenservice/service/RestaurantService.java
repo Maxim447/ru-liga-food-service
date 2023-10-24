@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.FullRestaurantDTO;
-import ru.liga.dto.GetRestaurantResponseDTO;
+import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.entity.Restaurant;
 import ru.liga.kitchenservice.mapper.RestaurantMapper;
@@ -30,9 +30,9 @@ public class RestaurantService {
         return ResponseEntity.ok().build();
     }
 
-    public GetRestaurantResponseDTO getRestaurants(PageRequest pageRequest) {
+    public GetResponseDTO<FullRestaurantDTO> getRestaurants(PageRequest pageRequest) {
         Page<Restaurant> restaurants = restaurantRepository.findAll(pageRequest);
-        return new GetRestaurantResponseDTO(RestaurantMapper.mapToDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return new GetResponseDTO<>(RestaurantMapper.mapToDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
     public FullRestaurantDTO getRestaurantById(Long id) {

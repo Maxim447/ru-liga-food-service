@@ -5,8 +5,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.liga.dto.GetKitchenOrdersResponseDTO;
+import ru.liga.dto.GetResponseDTO;
+import ru.liga.dto.KitchenOrderDTO;
 import ru.liga.entity.Order;
+import ru.liga.entity.enums.OrderStatus;
 import ru.liga.kitchenservice.mapper.OrderMapper;
 import ru.liga.kitchenservice.repository.OrderRepository;
 
@@ -20,8 +22,8 @@ public class KitchenService {
     private final OrderRepository orderRepository;
 
     @Operation(summary = "Получить все заказы")
-    public GetKitchenOrdersResponseDTO getOrdersByStatus(String status, PageRequest pageRequest) {
+    public GetResponseDTO<KitchenOrderDTO> getOrdersByStatus(OrderStatus status, PageRequest pageRequest) {
         List<Order> orders = orderRepository.getOrdersByStatus(status, pageRequest);
-        return new GetKitchenOrdersResponseDTO(OrderMapper.mapToDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return new GetResponseDTO<>(OrderMapper.mapToDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 }

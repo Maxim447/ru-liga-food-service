@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.liga.dto.GetKitchenOrdersResponseDTO;
+import ru.liga.dto.GetResponseDTO;
+import ru.liga.dto.KitchenOrderDTO;
+import ru.liga.entity.enums.OrderStatus;
 import ru.liga.kitchenservice.service.KitchenService;
 
 @Tag(name = "API для работы с рестараном")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/kitchen")
 public class KitchenController {
 
     @Schema(description = "Сервис для KitchenController")
@@ -24,7 +26,7 @@ public class KitchenController {
 
     @Operation(summary = "Получить все заказы")
     @GetMapping("/orders")
-    public GetKitchenOrdersResponseDTO getOrders(@RequestParam(value = "status") String status,
+    public GetResponseDTO<KitchenOrderDTO> getOrders(@RequestParam(value = "status") OrderStatus status,
             @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return kitchenService.getOrdersByStatus(status, PageRequest.of(pageIndex, pageCount));
