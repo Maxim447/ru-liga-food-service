@@ -24,8 +24,6 @@ public class KitchenController {
     @Schema(description = "Сервис для KitchenController")
     private final KitchenService kitchenService;
 
-    private final KitchenClient kitchenClient;
-
     @Operation(summary = "Получить все заказы")
     @GetMapping("/orders")
     public GetResponseDTO<KitchenOrderDTO> getOrders(@RequestParam(value = "status") OrderStatus status,
@@ -33,9 +31,18 @@ public class KitchenController {
             @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return kitchenService.getOrdersByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
+    @PostMapping("/accept/{orderId}")
+    public void acceptOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
+        kitchenService.acceptOrder(orderId, actionDTO);
+    }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody ActionDTO actionDTO) {
-        return kitchenClient.updateOrderStatus(id, actionDTO);
+    @PostMapping("/deny/{orderId}")
+    public void denyOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
+        kitchenService.denyOrder(orderId, actionDTO);
+    }
+
+    @PostMapping("/finish/{orderId}")
+    public void finishOrder(@PathVariable Long orderId, @RequestParam(name = "routingKey") String routingKey) {
+        kitchenService.finishOrder(orderId, routingKey);
     }
 }
