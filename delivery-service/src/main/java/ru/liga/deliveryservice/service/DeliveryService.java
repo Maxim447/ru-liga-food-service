@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.*;
 import ru.liga.entity.enums.OrderStatus;
@@ -25,5 +26,12 @@ public class DeliveryService {
     public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(OrderStatus status, PageRequest pageRequest) {
         List<Order> orders = orderRepository.findAllByStatus(status, pageRequest);
         return new GetResponseDTO<>(DeliveryMapper.mapToDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
+    }
+
+    public ResponseEntity<?> updateOrderStatus(Long id, ActionDTO actionDTO) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        order.setStatus(actionDTO.getOrderAction());
+        orderRepository.save(order);
+        return ResponseEntity.ok().build();
     }
 }
