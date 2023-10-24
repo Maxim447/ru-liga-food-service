@@ -1,4 +1,4 @@
-package ru.liga.orderservice.service;
+package ru.liga.kitchenservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.entity.RestaurantMenuItem;
-import ru.liga.orderservice.mapper.RestaurantMenuItemMapper;
-import ru.liga.orderservice.repository.RestaurantMenuItemRepository;
+import ru.liga.kitchenservice.mapper.RestaurantMenuItemMapper;
+import ru.liga.kitchenservice.repository.RestaurantMenuItemRepository;
 
 import java.math.BigDecimal;
 
@@ -19,10 +19,6 @@ public class RestaurantMenuItemService {
     public RestaurantMenuItemsDTO getMenuItemById(Long id) {
         RestaurantMenuItem restaurantMenuItem = restaurantMenuItemRepository.getRestaurantMenuItemById(id).orElseThrow();
         return RestaurantMenuItemMapper.mapToDto(restaurantMenuItem);
-    }
-
-    public void deleteMenuItemById(Long id) {
-        restaurantMenuItemRepository.deleteById(id);
     }
 
     public ResponseEntity<?> changeItemPrice(Long id, Double price) {

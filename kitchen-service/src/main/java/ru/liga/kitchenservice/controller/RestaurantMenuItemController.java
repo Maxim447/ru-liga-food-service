@@ -1,10 +1,10 @@
-package ru.liga.orderservice.controller;
+package ru.liga.kitchenservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.RestaurantMenuItemsDTO;
-import ru.liga.orderservice.service.RestaurantMenuItemService;
+import ru.liga.kitchenservice.service.RestaurantMenuItemService;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,13 +16,8 @@ public class RestaurantMenuItemController {
     public RestaurantMenuItemsDTO getRestaurantItemById(@PathVariable("id") Long id) {
         return restaurantMenuItemService.getMenuItemById(id);
     }
-
-    //    @DeleteMapping("/restaurantItem/{id}")
-//    public void deleteOrderItemById(@PathVariable("id") Long id) {
-//        restaurantMenuItemService.deleteMenuItemById(id);
-//    }
     @PutMapping("/restaurantItem/{id}")
-    public ResponseEntity<?> changeResItemPrice(@PathVariable("id") Long id, @RequestBody Double price) {
+    public ResponseEntity<?> changeRestaurantItemPrice(@PathVariable("id") Long id, @RequestBody Double price) {
         return restaurantMenuItemService.changeItemPrice(id, price);
     }
 }
