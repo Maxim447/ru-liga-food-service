@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "hometask-7" ]
   pull_request:
     branches: [ "main" ]
 
@@ -21,6 +21,6 @@ jobs:
           cache: maven
 
 
-      - name: Check and Build application
+      - name: Build application
         run: |
           mvn install --no-transfer-progress
