@@ -24,3 +24,4 @@ jobs:
       - name: Build application
         run: |
           mvn install --no-transfer-progress
+          docker-compose build
