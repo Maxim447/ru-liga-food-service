@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import ru.liga.dto.ActionDTO;
 
 
-@FeignClient(name = "kitchen-client", url = "http://localhost:8080")
+@FeignClient(name = "kitchen-client", url = "${delivery.service.url}")
 public interface KitchenClient {
 
     @PostMapping("/deliveries/{id}")
