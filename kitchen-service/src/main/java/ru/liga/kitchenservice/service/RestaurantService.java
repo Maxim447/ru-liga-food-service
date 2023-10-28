@@ -10,8 +10,8 @@ import ru.liga.dto.FullRestaurantDTO;
 import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.entity.Restaurant;
-import ru.liga.kitchenservice.mapper.RestaurantMapper;
 import ru.liga.kitchenservice.repository.RestaurantRepository;
+import ru.liga.mapper.abstraction.AbstractMapper;
 
 
 @Service
@@ -19,6 +19,8 @@ import ru.liga.kitchenservice.repository.RestaurantRepository;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final AbstractMapper<Restaurant, FullRestaurantDTO> restaurantMapper;
+
     public ResponseEntity<?> createRestaurant(RestaurantCreationDTO restaurantCreationDTO) {
         Restaurant restaurant = new Restaurant();
         restaurant.setAddress(restaurantCreationDTO.getAddress());
@@ -32,11 +34,11 @@ public class RestaurantService {
 
     public GetResponseDTO<FullRestaurantDTO> getRestaurants(PageRequest pageRequest) {
         Page<Restaurant> restaurants = restaurantRepository.findAll(pageRequest);
-        return new GetResponseDTO<>(RestaurantMapper.mapToDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return new GetResponseDTO<>(restaurantMapper.toDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
     public FullRestaurantDTO getRestaurantById(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        return new FullRestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getStatus(), restaurant.getLongitude(), restaurant.getLatitude());
+        return restaurantMapper.toDto(restaurant);
     }
 }

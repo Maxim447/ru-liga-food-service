@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.ItemsDTO;
 import ru.liga.entity.OrderItem;
-import ru.liga.orderservice.mapper.ItemMapper;
+import ru.liga.mapper.abstraction.AbstractMapper;
 import ru.liga.orderservice.repository.OrderItemRepository;
 
 @Service
@@ -12,9 +12,10 @@ import ru.liga.orderservice.repository.OrderItemRepository;
 public class OrderItemService {
 
     private final OrderItemRepository orderItemRepository;
+    private final AbstractMapper<OrderItem, ItemsDTO> orderItemMapper;
     public ItemsDTO getItemById(Long id) {
         OrderItem orderItem = orderItemRepository.getOrderItemById(id).orElseThrow();
-        return ItemMapper.mapToDto(orderItem);
+        return orderItemMapper.toDto(orderItem);
     }
 
     public void deleteItemById(long id) {

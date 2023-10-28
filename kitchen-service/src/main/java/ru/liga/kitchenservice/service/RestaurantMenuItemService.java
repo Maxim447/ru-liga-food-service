@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.entity.RestaurantMenuItem;
-import ru.liga.kitchenservice.mapper.RestaurantMenuItemMapper;
 import ru.liga.kitchenservice.repository.RestaurantMenuItemRepository;
+import ru.liga.mapper.abstraction.AbstractMapper;
 
 import java.math.BigDecimal;
 
@@ -16,9 +16,10 @@ import java.math.BigDecimal;
 public class RestaurantMenuItemService {
 
     private final RestaurantMenuItemRepository restaurantMenuItemRepository;
+    private final AbstractMapper<RestaurantMenuItem, RestaurantMenuItemsDTO> restaurantMenuItemMapper;
     public RestaurantMenuItemsDTO getMenuItemById(Long id) {
         RestaurantMenuItem restaurantMenuItem = restaurantMenuItemRepository.getRestaurantMenuItemById(id).orElseThrow();
-        return RestaurantMenuItemMapper.mapToDto(restaurantMenuItem);
+        return restaurantMenuItemMapper.toDto(restaurantMenuItem);
     }
 
     public ResponseEntity<?> changeItemPrice(Long id, Double price) {
