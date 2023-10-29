@@ -18,13 +18,27 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Listener RabbitMQ
+ */
 @Service
 @RequiredArgsConstructor
 public class QueueListener {
 
+    /**
+     * Репозиторий для работы с базой днаыых orders
+     */
     private final OrderRepository orderRepository;
+
+    /**
+     * Репозиторий для работы с базой днаыых couriers
+     */
     private final CourierRepository courierRepository;
 
+
+    /**
+     * Найти свободного курьера
+     */
     @RabbitListener(queues = {"courier1", "courier2"})
     public void findCouriers(String message) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -46,6 +60,9 @@ public class QueueListener {
         orderRepository.save(order);
     }
 
+    /**
+     * Поиск ближайшего курьера из списка свободных
+     */
     private Courier findNearestCourier(List<Courier> couriers, Order order) {
         Restaurant restaurant = order.getRestaurantId();
         Courier nearestCourier = null;
@@ -60,6 +77,9 @@ public class QueueListener {
         return nearestCourier;
     }
 
+    /**
+     * Расчет расстояния от курьера до ресторана
+     */
     private double calculateDistanceBetweenTwoPoints(BigDecimal courierLongitude, BigDecimal courierLatitude, BigDecimal restaurantLongitude, BigDecimal restaurantLatitude) {
         double earthRadius = 6371;
 

@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Сервис для работы с заказами
+ */
 @Schema(description = "Сервис для оформления заказов")
 @RequiredArgsConstructor
 @Service
@@ -25,11 +28,24 @@ import java.util.List;
 public class OrderService {
 
 
+    /**
+     * Репозиторий для работы с базой днаыых orders
+     */
     private final OrderRepository orderRepository;
+
+    /**
+     * Маппер для преобразования сущности Order в OrderDTO
+     */
     private final AbstractMapper<Order, OrderDTO> orderMapper;
+
+    /**
+     * Маппер для преобразования сущности OrderItem в ItemsDTO
+     */
     private final AbstractMapper<OrderItem, ItemsDTO> itemsMapper;
 
-    @Operation(summary = "Получить все заказы")
+    /**
+     * Получить все заказы
+     */
     public GetResponseDTO<OrderDTO> getAllOrders(PageRequest pageRequest) {
         Page<Order> orders = orderRepository.findAll(pageRequest);
         List<OrderDTO> orderDTOList = new ArrayList<>();
@@ -44,7 +60,9 @@ public class OrderService {
         return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
-    @Operation(summary = "Получить заказ по id")
+    /**
+     * Получить заказ по id"
+     */
     public OrderDTO getOrderById(Long id) {
         Order order = orderRepository.getOrderById(id).orElseThrow();
 
@@ -57,7 +75,9 @@ public class OrderService {
     }
 
 
-    @Operation(summary = "Создать новый заказ")
+    /**
+     * Создать новый заказ
+     */
     public OrderConfirmationDTO createOrder(OrderCreationDTO orderCreationDto) {
         return new OrderConfirmationDTO(1L, "https://secretPaymentUrl.com", Date.from(Instant.now().plusSeconds(100)));
     }

@@ -1,7 +1,5 @@
 package ru.liga.deliveryservice.service;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
@@ -16,20 +14,35 @@ import ru.liga.mapper.abstraction.AbstractMapper;
 import java.util.List;
 
 
-@Schema(description = "Сервис для отправки заказов курьерам")
+/**
+ * Сервис для отправки заказов курьерам
+ */
 @RequiredArgsConstructor
 @Service
 @ComponentScan("ru.liga.mapper")
 public class DeliveryService {
 
+    /**
+     * Репозиторий для работы с базой днаыых orders
+     */
     private final OrderRepository orderRepository;
+
+    /**
+     * Маппер для преобразования сущности Order в DeliveryDTO
+     */
     private final AbstractMapper<Order, DeliveryDTO> deliveryMapper;
-    @Operation(summary = "Получить все доставки")
+
+    /**
+     * Получить все доставки по статусу
+     */
     public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(OrderStatus status, PageRequest pageRequest) {
         List<Order> orders = orderRepository.findAllByStatus(status, pageRequest);
         return new GetResponseDTO<>(deliveryMapper.toDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
+    /**
+     * Обновить статус заказа
+     */
     public ResponseEntity<?> updateOrderStatus(Long id, ActionDTO actionDTO) {
         Order order = orderRepository.findById(id).orElseThrow();
         order.setStatus(actionDTO.getOrderAction());

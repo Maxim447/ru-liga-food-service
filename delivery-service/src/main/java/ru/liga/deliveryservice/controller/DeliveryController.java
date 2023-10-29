@@ -2,7 +2,6 @@ package ru.liga.deliveryservice.controller;
 
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +17,9 @@ import ru.liga.entity.enums.OrderStatus;
 @RequestMapping("/deliveries")
 public class DeliveryController {
 
-    @Schema(description = "Сервис для отправки заказов курьерам")
+    /**
+     * Сервис для отправки заказов курьерам
+     */
     private final DeliveryService deliveryService;
 
     @Operation(summary = "Получить все доставки")
@@ -29,6 +30,7 @@ public class DeliveryController {
         return deliveryService.getDeliveriesByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
 
+    @Operation(summary = "Обновить статус доставки")
     @PostMapping("/{id}")
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody ActionDTO actionDTO) {
         return deliveryService.updateOrderStatus(id, actionDTO);

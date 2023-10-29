@@ -10,6 +10,9 @@ import ru.liga.kitchenservice.service.RestaurantMenuItemService;
 @RequiredArgsConstructor
 public class RestaurantMenuItemController {
 
+    /**
+     * Сервис для RestaurantMenuItemController
+     */
     private final RestaurantMenuItemService restaurantMenuItemService;
 
     @GetMapping("/restaurantItem/{id}")

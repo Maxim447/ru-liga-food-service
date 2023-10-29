@@ -1,7 +1,5 @@
 package ru.liga.kitchenservice.service;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
@@ -20,20 +18,37 @@ import ru.liga.mapper.abstraction.AbstractMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-@Schema(description = "Сервис для приема заказов на кухню")
+/**
+ * Сервис для приема заказов на кухне
+ */
 @RequiredArgsConstructor
 @Service
 @ComponentScan(basePackages = "ru.liga.mapper")
 public class KitchenService {
 
+    /**
+     * Репозиторий для работы с базой днаыых orders
+     */
     private final OrderRepository orderRepository;
 
+    /**
+     * Сервис для отправки сообщений RabbitMQ
+     */
     private final RabbitMQProducerService rabbitMQProducerService;
 
+    /**
+     * Feign клиент для общения с delivery-service
+     */
     private final KitchenClient kitchenClient;
 
+    /**
+     * Маппер для преобразования сущности OrderItem в MenuItemsDTO
+     */
     private final AbstractMapper<OrderItem, MenuItemsDTO> kitchenOrderItemMapper;
-    @Operation(summary = "Получить все заказы")
+
+    /**
+     * Получить все заказы
+     */
     public GetResponseDTO<KitchenOrderDTO> getOrdersByStatus(OrderStatus status, PageRequest pageRequest) {
         List<Order> orders = orderRepository.getOrdersByStatus(status, pageRequest);
         List<KitchenOrderDTO> orderDTOList = new ArrayList<>();
@@ -44,15 +59,23 @@ public class KitchenService {
         return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
-
+    /**
+     * Принять заказ
+     */
     public void acceptOrder(Long orderId, ActionDTO actionDTO) {
         kitchenClient.updateOrderStatus(orderId, actionDTO);
     }
 
+    /**
+     * Отклонить заказ
+     */
     public void denyOrder(Long orderId, ActionDTO actionDTO) {
         kitchenClient.updateOrderStatus(orderId, actionDTO);
     }
 
+    /**
+     * Завершить заказ
+     */
     public void finishOrder(Long orderId, String routingKey) {
         rabbitMQProducerService.sendMessage(String.valueOf(orderId), routingKey);
     }
