@@ -17,12 +17,16 @@
     <properties>
         <openfeign.version>3.1.8</openfeign.version>
         <fileupload.version>1.5</fileupload.version>
+        <security.test>6.1.4</security.test>
+        <boot.test>2.7.15</boot.test>
+        <gateway.version>3.0.4</gateway.version>
+        <oauth-server.version>0.3.0</oauth-server.version>
+        <session-core.version>2.7.4</session-core.version>
         <common.version>0.0.1-SNAPSHOT</common.version>
         <spring.version>2.7.15</spring.version>
         <lombok.version>1.18.30</lombok.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <springdoc.version>1.7.0</springdoc.version>
-        <junit.version>5.10.0</junit.version>
         <java.version>11</java.version>
         <jackson.version>2.15.2</jackson.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
@@ -35,6 +39,42 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-client</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${oauth-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-core</artifactId>
+                <version>${session-core.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>ru.liga</groupId>
                 <artifactId>common</artifactId>
@@ -85,13 +125,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <scope>test</scope>
-                <version>${junit.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${openfeign.version}</version>
@@ -113,6 +146,20 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${org.mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-test</artifactId>
+                <version>${security.test}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${boot.test}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
