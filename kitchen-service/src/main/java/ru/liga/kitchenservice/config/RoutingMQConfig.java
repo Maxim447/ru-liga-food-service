@@ -7,6 +7,9 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Конфигурация очередей для RabbitMQ
+ */
 @Configuration
 public class RoutingMQConfig {
 

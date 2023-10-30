@@ -2,7 +2,6 @@ package ru.liga.orderservice.controller;
 
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +19,10 @@ import javax.validation.constraints.PositiveOrZero;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Schema(description = "Сервис для OrderController")
+
+    /**
+     * Сервис для работы с заказами
+     */
     private final OrderService orderService;
 
     @Operation(summary = "Получить все заказы")

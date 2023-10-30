@@ -10,15 +10,29 @@ import ru.liga.dto.FullRestaurantDTO;
 import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.entity.Restaurant;
-import ru.liga.kitchenservice.mapper.RestaurantMapper;
 import ru.liga.kitchenservice.repository.RestaurantRepository;
+import ru.liga.mapper.abstraction.AbstractMapper;
 
-
+/**
+ * Сервис для работы с ресторанами
+ */
 @Service
 @RequiredArgsConstructor
 public class RestaurantService {
 
+    /**
+     * Репозиторий для работы с базой днаыых restaurants
+     */
     private final RestaurantRepository restaurantRepository;
+
+    /**
+     * Маппер для преобразования сущности Restaurant в FullRestaurantDTO
+     */
+    private final AbstractMapper<Restaurant, FullRestaurantDTO> restaurantMapper;
+
+    /**
+     * Создать ресторан
+     */
     public ResponseEntity<?> createRestaurant(RestaurantCreationDTO restaurantCreationDTO) {
         Restaurant restaurant = new Restaurant();
         restaurant.setAddress(restaurantCreationDTO.getAddress());
@@ -30,13 +44,19 @@ public class RestaurantService {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Получить все рестораны
+     */
     public GetResponseDTO<FullRestaurantDTO> getRestaurants(PageRequest pageRequest) {
         Page<Restaurant> restaurants = restaurantRepository.findAll(pageRequest);
-        return new GetResponseDTO<>(RestaurantMapper.mapToDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return new GetResponseDTO<>(restaurantMapper.toDto(restaurants.getContent()), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
+    /**
+     * Получить ресторан по id
+     */
     public FullRestaurantDTO getRestaurantById(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        return new FullRestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getAddress(), restaurant.getStatus(), restaurant.getLongitude(), restaurant.getLatitude());
+        return restaurantMapper.toDto(restaurant);
     }
 }

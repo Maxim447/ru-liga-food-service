@@ -1,47 +1,81 @@
 package ru.liga.kitchenservice.service;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.ActionDTO;
 import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.KitchenOrderDTO;
+import ru.liga.dto.MenuItemsDTO;
 import ru.liga.entity.Order;
+import ru.liga.entity.OrderItem;
 import ru.liga.entity.enums.OrderStatus;
 import ru.liga.kitchenservice.clients.KitchenClient;
-import ru.liga.kitchenservice.mapper.OrderMapper;
 import ru.liga.kitchenservice.repository.OrderRepository;
+import ru.liga.mapper.abstraction.AbstractMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Schema(description = "Сервис для приема заказов на кухню")
+/**
+ * Сервис для приема заказов на кухне
+ */
 @RequiredArgsConstructor
 @Service
+@ComponentScan(basePackages = "ru.liga.mapper")
 public class KitchenService {
 
+    /**
+     * Репозиторий для работы с базой днаыых orders
+     */
     private final OrderRepository orderRepository;
 
+    /**
+     * Сервис для отправки сообщений RabbitMQ
+     */
     private final RabbitMQProducerService rabbitMQProducerService;
 
+    /**
+     * Feign клиент для общения с delivery-service
+     */
     private final KitchenClient kitchenClient;
 
-    @Operation(summary = "Получить все заказы")
+    /**
+     * Маппер для преобразования сущности OrderItem в MenuItemsDTO
+     */
+    private final AbstractMapper<OrderItem, MenuItemsDTO> kitchenOrderItemMapper;
+
+    /**
+     * Получить все заказы
+     */
     public GetResponseDTO<KitchenOrderDTO> getOrdersByStatus(OrderStatus status, PageRequest pageRequest) {
         List<Order> orders = orderRepository.getOrdersByStatus(status, pageRequest);
-        return new GetResponseDTO<>(OrderMapper.mapToDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
+        List<KitchenOrderDTO> orderDTOList = new ArrayList<>();
+        for (Order order : orders) {
+            List<MenuItemsDTO> menuItemsDTOList = kitchenOrderItemMapper.toDto(order.getItems());
+            orderDTOList.add(new KitchenOrderDTO(order.getId(), menuItemsDTOList));
+        }
+        return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
 
-
+    /**
+     * Принять заказ
+     */
     public void acceptOrder(Long orderId, ActionDTO actionDTO) {
         kitchenClient.updateOrderStatus(orderId, actionDTO);
     }
 
+    /**
+     * Отклонить заказ
+     */
     public void denyOrder(Long orderId, ActionDTO actionDTO) {
         kitchenClient.updateOrderStatus(orderId, actionDTO);
     }
 
+    /**
+     * Завершить заказ
+     */
     public void finishOrder(Long orderId, String routingKey) {
         rabbitMQProducerService.sendMessage(String.valueOf(orderId), routingKey);
     }

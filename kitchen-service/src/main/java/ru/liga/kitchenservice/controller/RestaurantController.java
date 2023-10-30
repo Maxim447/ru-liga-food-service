@@ -17,6 +17,9 @@ import javax.validation.constraints.PositiveOrZero;
 @RequestMapping("/restaurant")
 public class RestaurantController {
 
+    /**
+     * Сервис для RestaurantController
+     */
     private final RestaurantService restaurantService;
 
     @PostMapping("/create")

@@ -21,7 +21,10 @@ import ru.liga.kitchenservice.service.KitchenService;
 @RequestMapping("/kitchen")
 public class KitchenController {
 
-    @Schema(description = "Сервис для KitchenController")
+
+    /**
+     * Сервис для KitchenController
+     */
     private final KitchenService kitchenService;
 
     @Operation(summary = "Получить все заказы")
@@ -31,16 +34,17 @@ public class KitchenController {
             @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return kitchenService.getOrdersByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
+    @Operation(summary = "Взять заказ")
     @PostMapping("/accept/{orderId}")
     public void acceptOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
         kitchenService.acceptOrder(orderId, actionDTO);
     }
-
+    @Operation(summary = "Отклонить заказ")
     @PostMapping("/deny/{orderId}")
     public void denyOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
         kitchenService.denyOrder(orderId, actionDTO);
     }
-
+    @Operation(summary = "Завершить заказ")
     @PostMapping("/finish/{orderId}")
     public void finishOrder(@PathVariable Long orderId, @RequestParam(name = "routingKey") String routingKey) {
         kitchenService.finishOrder(orderId, routingKey);

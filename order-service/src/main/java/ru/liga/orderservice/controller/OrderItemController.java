@@ -11,6 +11,10 @@ import ru.liga.orderservice.service.OrderItemService;
 @RequestMapping("/orderItem")
 public class OrderItemController {
 
+
+    /**
+     * Сервис для работы с содержимым заказа
+     */
     private final OrderItemService orderItemService;
 
     @GetMapping("/{id}")
