@@ -11,22 +11,19 @@ import java.util.Date;
 import java.util.List;
 
 
-@Schema(description = "DTO для получения заказа")
+
 @Data
 @AllArgsConstructor
 @Builder
+@Schema(description = "DTO для получения заказа")
 public class OrderDTO {
 
-    @Schema(description = "Id заказа")
     private Long id;
 
-    @Schema(description = "Ресторан")
     @JsonProperty("restaurant")
     private CustomerRestaurantDTO customerRestaurantDTO;
 
-    @Schema(description = "Время")
     private Date timestamp;
 
-    @Schema(description = "Список товаров в заказе")
     private List<ItemsDTO> items;
 }

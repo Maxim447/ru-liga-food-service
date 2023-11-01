@@ -12,7 +12,6 @@ import ru.liga.entity.enums.OrderStatus;
 @Data
 public class ActionDTO {
 
-    @Schema(description = "Статус заказа")
     @JsonProperty("order_action")
     private OrderStatus orderAction;
 }

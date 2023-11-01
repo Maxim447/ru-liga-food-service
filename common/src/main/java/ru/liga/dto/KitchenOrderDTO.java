@@ -12,12 +12,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
+@Schema(description = "Описание заказа")
 public class KitchenOrderDTO {
 
-    @Schema(description = "Id заказа")
     private Long id;
 
-    @Schema(description = "Список товаров в меню")
     @JsonProperty("menu_items")
     private List<MenuItemsDTO> menuItems;
 }

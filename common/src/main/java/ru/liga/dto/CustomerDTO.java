@@ -9,9 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CustomerDTO {
 
-    @Schema(description = "Адрес")
     private String address;
 
-    @Schema(description = "Расстояние")
     private Double distance;
 }
