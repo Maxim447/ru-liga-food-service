@@ -2,9 +2,14 @@ package ru.liga.orderservice.controller;
 
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.*;
 import ru.liga.orderservice.service.OrderService;
@@ -16,7 +21,7 @@ import javax.validation.constraints.PositiveOrZero;
 @Tag(name = "API для оформления заказов")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
 
@@ -26,15 +31,29 @@ public class OrderController {
     private final OrderService orderService;
 
     @Operation(summary = "Получить все заказы")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content(mediaType = "application/json")
+            })
+    })
     @GetMapping("/")
-    private GetResponseDTO<OrderDTO> getAllOrders(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+    private ResponseEntity<GetResponseDTO<OrderDTO>> getAllOrders(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
         return orderService.getAllOrders(PageRequest.of(pageIndex, pageCount));
     }
 
     @Operation(summary = "Получить заказ по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                    @Content(mediaType = "application/json", schema =
+                    @Schema(implementation = OrderDTO.class))
+            }),
+            @ApiResponse(responseCode = "204", description = "Order with this id not found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
     @GetMapping("/{id}")
-    private OrderDTO gerOrdersById(@PathVariable Long id) {
+    private ResponseEntity<?> gerOrdersById(@PathVariable Long id) {
         return orderService.getOrderById(id);
     }
 

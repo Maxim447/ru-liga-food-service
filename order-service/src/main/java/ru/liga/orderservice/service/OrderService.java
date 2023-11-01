@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.*;
 import ru.liga.entity.Order;
@@ -17,6 +18,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Сервис для работы с заказами
@@ -46,32 +48,37 @@ public class OrderService {
     /**
      * Получить все заказы
      */
-    public GetResponseDTO<OrderDTO> getAllOrders(PageRequest pageRequest) {
+    public ResponseEntity<GetResponseDTO<OrderDTO>> getAllOrders(PageRequest pageRequest) {
         Page<Order> orders = orderRepository.findAll(pageRequest);
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orders) {
 
             OrderDTO orderDTO = orderMapper.toDto(order);
-            List<ItemsDTO> items =itemsMapper.toDto(order.getItems());
+            List<ItemsDTO> items = itemsMapper.toDto(order.getItems());
 
             orderDTO.setItems(items);
             orderDTOList.add(orderDTO);
         }
-        return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
+        return ResponseEntity.ok(new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize()));
     }
 
     /**
      * Получить заказ по id"
      */
-    public OrderDTO getOrderById(Long id) {
-        Order order = orderRepository.getOrderById(id).orElseThrow();
-
-        OrderDTO orderDTO = orderMapper.toDto(order);
-        List<ItemsDTO> items =itemsMapper.toDto(order.getItems());
-
-        orderDTO.setItems(items);
-
-        return orderDTO;
+    public ResponseEntity<?> getOrderById(Long id) {
+        OrderDTO orderDTO;
+        try {
+            Order order = orderRepository.getOrderById(id)
+                    .orElseThrow(
+                            () -> new NoSuchElementException("There is no order with id:" + id)
+                    );
+            orderDTO = orderMapper.toDto(order);
+            List<ItemsDTO> items = itemsMapper.toDto(order.getItems());
+            orderDTO.setItems(items);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(orderDTO);
     }
 
 
