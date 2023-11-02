@@ -6,9 +6,9 @@ spring:
     gateway:
       routes:
         - id: order-service
-          uri: http://127.0.0.1:8084/order
+          uri: http://127.0.0.1:8084/orders
           predicates:
-            - Path=/order/**
+            - Path=/orders/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
