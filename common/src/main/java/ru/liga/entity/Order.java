@@ -43,6 +43,6 @@ public class Order {
     @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;
 
-    @OneToMany(mappedBy = "orderId")
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> items;
 }

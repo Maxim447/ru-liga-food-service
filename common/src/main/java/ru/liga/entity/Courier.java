@@ -40,5 +40,6 @@ public class Courier {
     @Column(name = "latitude", nullable = false)
     private BigDecimal latitude;
 
+    @Column(name = "payment")
     private BigDecimal payment;
 }

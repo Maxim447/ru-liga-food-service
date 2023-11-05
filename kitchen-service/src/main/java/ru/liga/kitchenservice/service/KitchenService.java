@@ -9,12 +9,10 @@ import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.KitchenOrderDTO;
 import ru.liga.dto.MenuItemsDTO;
 import ru.liga.entity.Order;
-import ru.liga.entity.OrderItem;
 import ru.liga.entity.enums.OrderStatus;
 import ru.liga.kitchenservice.clients.KitchenClient;
 import ru.liga.kitchenservice.repository.OrderRepository;
 import ru.liga.mapper.KitchenOrderItemMapper;
-import ru.liga.mapper.abstraction.AbstractMapper;
 
 import java.util.ArrayList;
 import java.util.List;

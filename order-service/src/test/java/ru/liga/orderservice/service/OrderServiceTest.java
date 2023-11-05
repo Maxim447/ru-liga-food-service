@@ -1,49 +1,66 @@
 package ru.liga.orderservice.service;
 
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
+
+import ru.liga.dto.CustomerRestaurantDTO;
+import ru.liga.dto.ItemsDTO;
 import ru.liga.dto.OrderDTO;
 import ru.liga.entity.Order;
+import ru.liga.entity.OrderItem;
 import ru.liga.orderservice.repository.OrderRepository;
 
-import java.util.Optional;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-@SpringBootTest()
+@SpringBootTest
 public class OrderServiceTest {
 
     @Autowired
     private OrderService orderService;
 
-    @MockBean
+    @Autowired
     private OrderRepository orderRepository;
-
     @Test
     public void testGetOrderById_ExistingOrder() {
 
-        Order mockOrder = new Order();
-        when(orderRepository.getOrderById(1L)).thenReturn(Optional.of(mockOrder));
+        Long orderId = 1L;
+        Order order = orderRepository.getOrderById(orderId).orElseThrow();
+        CustomerRestaurantDTO customerRestaurantDTO = new CustomerRestaurantDTO(order.getRestaurantId().getName());
+        List<ItemsDTO> itemsDTOs = new ArrayList<>();
+        for (OrderItem item : order.getItems()) {
+            itemsDTOs.add(new ItemsDTO(item.getPrice().doubleValue(),
+                    item.getQuantity(),
+                    item.getRestaurantMenuItem().getDescription(),
+                    item.getRestaurantMenuItem().getImage())
+            );
+        }
 
-        ResponseEntity<?> responseEntity = orderService.getOrderById(1L);
+        OrderDTO orderDTO = new OrderDTO(orderId,
+                customerRestaurantDTO,
+                Timestamp.valueOf("2023-10-30 19:25:17.005612"),
+                itemsDTOs
+        );
 
-        assertEquals(200, responseEntity.getStatusCodeValue());
-        assertTrue(responseEntity.getBody() instanceof OrderDTO);
+        ResponseEntity<?> response = orderService.getOrderById(orderId);
+
+        assertNotNull(response);
+
+        assertEquals(ResponseEntity.ok(orderDTO), response);
     }
 
     @Test
     public void testGetOrderById_NonExistingOrder() {
-        when(orderRepository.getOrderById(200L)).thenReturn(Optional.empty());
-
-        ResponseEntity<?> responseEntity = orderService.getOrderById(2L);
+        ResponseEntity<?> responseEntity = orderService.getOrderById(0L);
 
         assertEquals(204, responseEntity.getStatusCodeValue());
         assertNull(responseEntity.getBody());
-
-        verify(orderRepository, times(1)).getOrderById(2L);
     }
 }

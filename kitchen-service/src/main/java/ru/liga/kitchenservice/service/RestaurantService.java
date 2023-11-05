@@ -12,7 +12,6 @@ import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.entity.Restaurant;
 import ru.liga.kitchenservice.repository.RestaurantRepository;
 import ru.liga.mapper.RestaurantMapper;
-import ru.liga.mapper.abstraction.AbstractMapper;
 
 /**
  * Сервис для работы с ресторанами

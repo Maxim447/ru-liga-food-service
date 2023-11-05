@@ -1,6 +1,5 @@
 package ru.liga.orderservice.service;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,12 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.liga.dto.*;
 import ru.liga.entity.Order;
-import ru.liga.entity.OrderItem;
 import ru.liga.mapper.OrderItemMapper;
 import ru.liga.mapper.OrderMapper;
-import ru.liga.mapper.abstraction.AbstractMapper;
 import ru.liga.orderservice.repository.OrderRepository;
 
 import java.time.Instant;
@@ -67,6 +65,7 @@ public class OrderService {
     /**
      * Получить заказ по id"
      */
+    @Transactional
     public ResponseEntity<?> getOrderById(Long id) {
         OrderDTO orderDTO;
         try {

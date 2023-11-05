@@ -8,7 +8,6 @@ import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.entity.RestaurantMenuItem;
 import ru.liga.kitchenservice.repository.RestaurantMenuItemRepository;
 import ru.liga.mapper.RestaurantMenuItemMapper;
-import ru.liga.mapper.abstraction.AbstractMapper;
 
 import java.math.BigDecimal;
 
