@@ -9,6 +9,7 @@ import ru.liga.dto.*;
 import ru.liga.entity.enums.OrderStatus;
 import ru.liga.entity.Order;
 import ru.liga.deliveryservice.repository.OrderRepository;
+import ru.liga.mapper.DeliveryMapper;
 import ru.liga.mapper.abstraction.AbstractMapper;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class DeliveryService {
     /**
      * Маппер для преобразования сущности Order в DeliveryDTO
      */
-    private final AbstractMapper<Order, DeliveryDTO> deliveryMapper;
+    private final DeliveryMapper deliveryMapper;
 
     /**
      * Получить все доставки по статусу

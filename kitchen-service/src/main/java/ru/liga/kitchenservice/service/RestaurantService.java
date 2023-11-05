@@ -11,6 +11,7 @@ import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.RestaurantCreationDTO;
 import ru.liga.entity.Restaurant;
 import ru.liga.kitchenservice.repository.RestaurantRepository;
+import ru.liga.mapper.RestaurantMapper;
 import ru.liga.mapper.abstraction.AbstractMapper;
 
 /**
@@ -28,7 +29,7 @@ public class RestaurantService {
     /**
      * Маппер для преобразования сущности Restaurant в FullRestaurantDTO
      */
-    private final AbstractMapper<Restaurant, FullRestaurantDTO> restaurantMapper;
+    private final RestaurantMapper restaurantMapper;
 
     /**
      * Создать ресторан

@@ -37,12 +37,12 @@ public class KitchenController {
     @Operation(summary = "Взять заказ")
     @PostMapping("/accept/{orderId}")
     public void acceptOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
-        kitchenService.acceptOrder(orderId, actionDTO);
+        kitchenService.actionWithOrder(orderId, actionDTO);
     }
     @Operation(summary = "Отклонить заказ")
     @PostMapping("/deny/{orderId}")
     public void denyOrder(@PathVariable Long orderId, @RequestBody ActionDTO actionDTO) {
-        kitchenService.denyOrder(orderId, actionDTO);
+        kitchenService.actionWithOrder(orderId, actionDTO);
     }
     @Operation(summary = "Завершить заказ")
     @PostMapping("/finish/{orderId}")

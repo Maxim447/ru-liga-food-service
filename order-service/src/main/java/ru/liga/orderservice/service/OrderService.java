@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import ru.liga.dto.*;
 import ru.liga.entity.Order;
 import ru.liga.entity.OrderItem;
+import ru.liga.mapper.OrderItemMapper;
+import ru.liga.mapper.OrderMapper;
 import ru.liga.mapper.abstraction.AbstractMapper;
 import ru.liga.orderservice.repository.OrderRepository;
 
@@ -38,12 +40,12 @@ public class OrderService {
     /**
      * Маппер для преобразования сущности Order в OrderDTO
      */
-    private final AbstractMapper<Order, OrderDTO> orderMapper;
+    private final OrderMapper orderMapper;
 
     /**
      * Маппер для преобразования сущности OrderItem в ItemsDTO
      */
-    private final AbstractMapper<OrderItem, ItemsDTO> itemsMapper;
+    private final OrderItemMapper itemsMapper;
 
     /**
      * Получить все заказы
