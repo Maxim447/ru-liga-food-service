@@ -10,16 +10,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class DeliveryDTO {
 
-    @Schema(description = "Id заказа")
     @JsonProperty("order_id")
     private Long orderId;
 
-    @Schema(description = "Ресторан")
     private DeliveryRestaurantDTO restaurant;
 
-    @Schema(description = "Заказчик")
     private CustomerDTO customer;
 
-    @Schema(description = "Способ оплаты")
     private Double payment;
 }

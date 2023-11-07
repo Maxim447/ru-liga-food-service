@@ -30,7 +30,7 @@ public class DeliveryController {
         return deliveryService.getDeliveriesByStatus(status, PageRequest.of(pageIndex, pageCount));
     }
 
-    @Operation(summary = "Обновить статус доставки")
+    @Operation(summary = "Обновить статус доставки по id")
     @PostMapping("/{id}")
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody ActionDTO actionDTO) {
         return deliveryService.updateOrderStatus(id, actionDTO);

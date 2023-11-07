@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.ItemsDTO;
 import ru.liga.entity.OrderItem;
+import ru.liga.mapper.OrderItemMapper;
 import ru.liga.mapper.abstraction.AbstractMapper;
 import ru.liga.orderservice.repository.OrderItemRepository;
 
@@ -24,7 +25,7 @@ public class OrderItemService {
     /**
      * Маппер для преобразования сущности OrderItem в ItemsDTO
      */
-    private final AbstractMapper<OrderItem, ItemsDTO> orderItemMapper;
+    private final OrderItemMapper orderItemMapper;
 
     /**
      * Получить сущность orderItem по id

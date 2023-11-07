@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.liga.dto.RestaurantMenuItemsDTO;
 import ru.liga.entity.RestaurantMenuItem;
 import ru.liga.kitchenservice.repository.RestaurantMenuItemRepository;
-import ru.liga.mapper.abstraction.AbstractMapper;
+import ru.liga.mapper.RestaurantMenuItemMapper;
 
 import java.math.BigDecimal;
 
@@ -26,7 +26,7 @@ public class RestaurantMenuItemService {
     /**
      * Маппер для преобразования сущности RestaurantMenuItem в RestaurantMenuItemsDTO
      */
-    private final AbstractMapper<RestaurantMenuItem, RestaurantMenuItemsDTO> restaurantMenuItemMapper;
+    private final RestaurantMenuItemMapper restaurantMenuItemMapper;
 
     /**
      * Получить предмет меню по id

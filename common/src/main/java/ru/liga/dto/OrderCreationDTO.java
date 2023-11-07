@@ -7,16 +7,15 @@ import lombok.Data;
 
 import java.util.List;
 
-@Schema(description = "DTO для создания запроса заказа")
+
 @Data
 @Builder
+@Schema(description = "DTO для создания запроса заказа")
 public class OrderCreationDTO {
 
-    @Schema(description = "Id ресторана")
     @JsonProperty("restaurant_id")
     private Long restaurantId;
 
-    @Schema(description = "Список товаров в меню")
     @JsonProperty("menu_items")
     private List<MenuItemsDTO> menuItems;
 }

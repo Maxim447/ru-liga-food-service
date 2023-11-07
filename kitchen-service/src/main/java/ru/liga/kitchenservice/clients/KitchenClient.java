@@ -11,7 +11,7 @@ import ru.liga.dto.ActionDTO;
 /**
  * Feign клиент для общения с delivery-service
  */
-@FeignClient(name = "kitchen-client", url = "http://localhost:8080")
+@FeignClient(name = "kitchen-client", url = "http://127.0.0.1:8080/delivery-service")
 public interface KitchenClient {
 
     /**

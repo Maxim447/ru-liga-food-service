@@ -9,12 +9,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
+@Schema(description = "Товар в меню")
 public class MenuItemsDTO {
 
-    @Schema(description = "Количество")
     private Integer quantity;
 
-    @Schema(description = "Id товара в меню")
     @JsonProperty("menu_item_id")
     private Long menuItemId;
 }

@@ -3,6 +3,7 @@ package ru.liga.deliveryservice.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import ru.liga.deliveryservice.repository.CourierRepository;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class QueueListener {
 
     /**
@@ -35,13 +37,13 @@ public class QueueListener {
      */
     private final CourierRepository courierRepository;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Найти свободного курьера
      */
     @RabbitListener(queues = {"courier1", "courier2"})
     public void findCouriers(String message) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
         Long orderId = objectMapper.readValue(message, Long.class);
         List<Courier> couriers = courierRepository.findAllByStatus(CourierStatus.FREE);
         Order order = orderRepository.findById(orderId).orElseThrow();
@@ -53,9 +55,9 @@ public class QueueListener {
             order.setStatus(OrderStatus.DELIVERY_PICKING);
             order.setCourierId(courier);
             order.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-            System.out.println("couriers found, assigning a courier to an order by id " + orderId);
+            log.info("couriers found, assigning a courier to an order by id " + orderId);
         } else {
-            System.out.println("no couriers found");
+            log.info("no couriers found");
         }
         orderRepository.save(order);
     }

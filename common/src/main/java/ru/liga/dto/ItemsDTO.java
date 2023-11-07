@@ -8,17 +8,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
+@Schema(description = "Предметы")
 public class ItemsDTO {
 
-    @Schema(description = "Цена")
     private Double price;
 
-    @Schema(description = "Количество")
     private Integer quantity;
 
-    @Schema(description = "Описание")
     private String description;
 
-    @Schema(description = "Картика")
     private String image;
 }

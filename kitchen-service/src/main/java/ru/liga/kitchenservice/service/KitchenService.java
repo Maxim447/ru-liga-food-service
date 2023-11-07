@@ -9,11 +9,10 @@ import ru.liga.dto.GetResponseDTO;
 import ru.liga.dto.KitchenOrderDTO;
 import ru.liga.dto.MenuItemsDTO;
 import ru.liga.entity.Order;
-import ru.liga.entity.OrderItem;
 import ru.liga.entity.enums.OrderStatus;
 import ru.liga.kitchenservice.clients.KitchenClient;
 import ru.liga.kitchenservice.repository.OrderRepository;
-import ru.liga.mapper.abstraction.AbstractMapper;
+import ru.liga.mapper.KitchenOrderItemMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class KitchenService {
     /**
      * Маппер для преобразования сущности OrderItem в MenuItemsDTO
      */
-    private final AbstractMapper<OrderItem, MenuItemsDTO> kitchenOrderItemMapper;
+    private final KitchenOrderItemMapper kitchenOrderItemMapper;
 
     /**
      * Получить все заказы
@@ -58,18 +57,10 @@ public class KitchenService {
         }
         return new GetResponseDTO<>(orderDTOList, pageRequest.getPageNumber(), pageRequest.getPageSize());
     }
-
     /**
-     * Принять заказ
+     * Принять или отклонить заказ
      */
-    public void acceptOrder(Long orderId, ActionDTO actionDTO) {
-        kitchenClient.updateOrderStatus(orderId, actionDTO);
-    }
-
-    /**
-     * Отклонить заказ
-     */
-    public void denyOrder(Long orderId, ActionDTO actionDTO) {
+    public void actionWithOrder(Long orderId, ActionDTO actionDTO) {
         kitchenClient.updateOrderStatus(orderId, actionDTO);
     }
 

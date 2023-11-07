@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-@Schema(description = "DTO ресторана")
+
 @Data
 @AllArgsConstructor
 @Builder
+@Schema(description = "Имя ресторана")
 public class RestaurantDTO {
 
-    @Schema(description = "Имя")
     private String name;
 }
