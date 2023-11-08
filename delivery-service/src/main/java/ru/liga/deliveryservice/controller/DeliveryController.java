@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.*;
 import ru.liga.deliveryservice.service.DeliveryService;
-import ru.liga.entity.enums.OrderStatus;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -30,7 +29,7 @@ public class DeliveryController {
     @GetMapping("/")
     public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
             @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
-        return deliveryService.getDeliveriesByStatus(PageRequest.of(pageIndex, pageCount));
+        return deliveryService.getDeliveries(PageRequest.of(pageIndex, pageCount));
     }
 
     @Operation(summary = "Принять заказ")

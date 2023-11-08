@@ -70,11 +70,13 @@ public class OrderController {
         return orderService.paymentOrder(id);
     }
 
+    @Operation(summary = "Принять заказ")
     @PutMapping("/{uuid}/accept")
     public ResponseEntity<?> acceptOrder(@PathVariable("uuid") UUID uuid) {
         return orderService.acceptOrder(uuid);
     }
 
+    @Operation(summary = "Завершить заказ")
     @PutMapping("/{uuid}/complete")
     public ResponseEntity<?> completeOrder(@PathVariable("uuid") UUID uuid) {
         return orderService.completeOrder(uuid);

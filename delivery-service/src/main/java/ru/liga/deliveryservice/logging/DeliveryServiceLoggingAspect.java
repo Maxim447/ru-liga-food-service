@@ -1,4 +1,4 @@
-package ru.liga.orderservice.loggingaspect;
+package ru.liga.deliveryservice.logging;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,19 +11,23 @@ import java.util.Date;
 
 @Configuration
 @Aspect
-public class OrderServiceLoggingAspect {
+public class DeliveryServiceLoggingAspect {
 
-    private final Logger logger = LogManager.getLogger(OrderServiceLoggingAspect.class);
+    private final Logger logger = LogManager.getLogger(DeliveryServiceLoggingAspect.class);
 
-    @Pointcut("execution(* ru.liga.orderservice.service.OrderService.getOrderById(..))")
-    public void getOrderById() {
+    @Pointcut("execution(* ru.liga.deliveryservice.service.DeliveryService.getDeliveries(..))")
+    public void getDeliveries(){
     }
 
-    @Pointcut("execution(* ru.liga.orderservice.service.OrderService.getAllOrders(..))")
-    public void getAllOrders() {
+    @Pointcut("execution(* ru.liga.deliveryservice.service.DeliveryService.takeOrder(..))")
+    public void takeOrder(){
     }
 
-    @Before("getOrderById() || getAllOrders()")
+    @Pointcut("execution(* ru.liga.deliveryservice.service.DeliveryService.complete(..))")
+    public void complete(){
+    }
+
+    @Before("getDeliveries() || takeOrder() || complete()")
     public void logBeforeCallingMethod(JoinPoint jointPoint) {
         logger.info("[" + new Date() + "] Метод "
                 + jointPoint.getSignature().getName()
@@ -31,14 +35,14 @@ public class OrderServiceLoggingAspect {
                 + Arrays.toString(jointPoint.getArgs()));
     }
 
-    @AfterReturning(pointcut = "getOrderById() || getAllOrders()", returning = "result")
+    @AfterReturning(pointcut = "getDeliveries() || takeOrder() || complete()", returning = "result")
     public void logAfterSuccessfulEnding(JoinPoint joinPoint, Object result) {
         logger.info("[" + new Date() + "] Метод "
                 + joinPoint.getSignature().getName()
                 + " завершился успешно и вернул " + result.toString());
     }
 
-    @AfterThrowing(pointcut = "getOrderById() || getAllOrders()", throwing = "exception")
+    @AfterThrowing(pointcut = "getDeliveries() || takeOrder() || complete()", throwing = "exception")
     public void logAfterExceptionEnding(JoinPoint joinPoint, Throwable exception) {
         logger.info("[" + new Date()
                 + "] Метод " + joinPoint.getSignature().getName() + " завершился неудачно, вызвав ошибку "

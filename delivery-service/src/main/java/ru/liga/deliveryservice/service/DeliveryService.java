@@ -39,12 +39,10 @@ public class DeliveryService {
      */
     private final DeliveryMapper deliveryMapper;
 
-    private final RabbitMQDeliveryService rabbitMQDeliveryService;
-
     /**
      * Получить все доставки по статусу
      */
-    public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(PageRequest pageRequest) {
+    public GetResponseDTO<DeliveryDTO> getDeliveries(PageRequest pageRequest) {
         List<Order> orders = orderRepository.findAllByStatus(OrderStatus.KITCHEN_PREPARING, pageRequest);
         return new GetResponseDTO<>(deliveryMapper.toDto(orders), pageRequest.getPageNumber(), pageRequest.getPageSize());
     }

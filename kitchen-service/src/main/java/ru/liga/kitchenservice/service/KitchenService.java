@@ -21,11 +21,6 @@ import java.util.UUID;
 @Transactional
 public class KitchenService {
 
-    /**
-     * Репозиторий для работы с базой днаыых orders
-     */
-    private final OrderRepository orderRepository;
-
     private final OrderClient orderClient;
 
     public void acceptOrder(UUID id) {
