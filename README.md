@@ -21,7 +21,7 @@
 docker run -lt --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ## 3. Сервисы аутентификации
 
-Для работы аутентификации необходимо запустить сначала AuthenticationService, а затем CloudGateway
+Для работы аутентификации необходимо запустить сначала Auth-Service, а затем CloudGateway
 ## 4. Основные сервисы
 
 Для корректной работы RabbitMQ сначала необходимо запустить notification-service, delivery-service, kitchen-service и order-service
