@@ -34,14 +34,14 @@ public class DeliveryController {
     }
 
     @Operation(summary = "Принять заказ")
-    @PostMapping("/{id}/take")
-    public ResponseEntity<?> take(@PathVariable UUID id) {
-        return deliveryService.take(id);
+    @PostMapping("/{courierId}/take/{id}")
+    public void takeOrder(@PathVariable Long courierId,@PathVariable UUID id) {
+        deliveryService.takeOrder(courierId, id);
     }
 
     @Operation(summary = "Завершить заказ")
-    @PostMapping("/{id}/complete")
-    public ResponseEntity<?> complete(@PathVariable UUID id) {
+    @PostMapping("/complete/{id}")
+    public ResponseEntity<?> completeOrder(@PathVariable UUID id) {
         return deliveryService.complete(id);
     }
 }

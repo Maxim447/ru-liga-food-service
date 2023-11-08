@@ -1,5 +1,6 @@
 package ru.liga.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "orders")
 public class Order {
 
@@ -45,6 +45,7 @@ public class Order {
     @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> items;
 }

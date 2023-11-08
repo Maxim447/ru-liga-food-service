@@ -66,13 +66,23 @@ public class OrderController {
 
     @Operation(summary = "Оплатить заказ")
     @PutMapping("/{id}/pay")
-    public ResponseEntity<?> pay(@PathVariable UUID id) {
-        return orderService.pay(id);
+    public ResponseEntity<?> paymentOrder(@PathVariable UUID id) {
+        return orderService.paymentOrder(id);
+    }
+
+    @PutMapping("/{uuid}/accept")
+    public ResponseEntity<?> acceptOrder(@PathVariable("uuid") UUID uuid) {
+        return orderService.acceptOrder(uuid);
+    }
+
+    @PutMapping("/{uuid}/complete")
+    public ResponseEntity<?> completeOrder(@PathVariable("uuid") UUID uuid) {
+        return orderService.completeOrder(uuid);
     }
 
     @Operation(summary = "Отменить заказ")
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<?> cancel(@PathVariable UUID id) {
-        return orderService.cancel(id);
+    public ResponseEntity<?> cancelOrder(@PathVariable UUID id) {
+        return orderService.cancelOrder(id);
     }
 }

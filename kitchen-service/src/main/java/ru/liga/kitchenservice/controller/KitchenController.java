@@ -25,19 +25,19 @@ public class KitchenController {
 
     @Operation(summary = "Взять заказ")
     @PostMapping("/{id}/accept")
-    public ResponseEntity<?> accept(@PathVariable UUID id) {
-        return kitchenService.acceptOrder(id);
+    public void accept(@PathVariable UUID id) {
+        kitchenService.acceptOrder(id);
     }
 
     @Operation(summary = "Отклонить заказ")
     @PostMapping("/{id}/decline")
-    public ResponseEntity<?> decline(@PathVariable UUID id) {
-        return kitchenService.declineOrder(id);
+    public void decline(@PathVariable UUID id) {
+        kitchenService.declineOrder(id);
     }
 
     @Operation(summary = "Завершить заказ")
     @PostMapping("/{id}/ready")
-    public ResponseEntity<?> ready(@PathVariable UUID id) {
-        return kitchenService.readyOrder(id);
+    public void ready(@PathVariable UUID id) {
+        kitchenService.readyOrder(id);
     }
 }

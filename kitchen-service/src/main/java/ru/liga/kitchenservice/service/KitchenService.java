@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.liga.entity.Order;
 import ru.liga.entity.enums.OrderStatus;
+import ru.liga.kitchenservice.client.OrderClient;
 import ru.liga.kitchenservice.repository.OrderRepository;
 
 import java.util.UUID;
@@ -25,27 +26,17 @@ public class KitchenService {
      */
     private final OrderRepository orderRepository;
 
-    public ResponseEntity<?> acceptOrder(UUID id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setStatus(OrderStatus.KITCHEN_PREPARING);
-        orderRepository.save(order);
+    private final OrderClient orderClient;
 
-        return ResponseEntity.ok().build();
+    public void acceptOrder(UUID id) {
+        orderClient.acceptOrder(id);
     }
 
-    public ResponseEntity<?> declineOrder(UUID id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setStatus(OrderStatus.KITCHEN_DECLINED);
-        orderRepository.save(order);
-
-        return ResponseEntity.ok().build();
+    public void declineOrder(UUID id) {
+        orderClient.denyOrder(id);
     }
 
-    public ResponseEntity<?> readyOrder(UUID id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setStatus(OrderStatus.KITCHEN_FINISHED);
-        orderRepository.save(order);
-
-        return ResponseEntity.ok().build();
+    public void readyOrder(UUID id) {
+        orderClient.completeOrder(id);
     }
 }

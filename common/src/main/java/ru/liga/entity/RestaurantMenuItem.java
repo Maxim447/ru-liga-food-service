@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "restaurant_menu_items")
 public class RestaurantMenuItem {
 

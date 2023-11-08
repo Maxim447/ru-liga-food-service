@@ -16,9 +16,4 @@ public interface DeliveryMapper extends AbstractMapper<Order, DeliveryDTO> {
     DeliveryDTO toDto(Order order);
 
     List<DeliveryDTO> toDto(List<Order> orders);
-
-    @Mapping(source = "orderId", target = "id")
-    @Mapping(source = "restaurant.address", target = "restaurantId.address")
-    @Mapping(source = "customer.address", target = "customerId.address")
-    Order toEntity(DeliveryDTO dto);
 }

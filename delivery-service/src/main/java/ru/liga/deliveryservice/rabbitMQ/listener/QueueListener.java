@@ -1,4 +1,4 @@
-package ru.liga.deliveryservice.service;
+package ru.liga.deliveryservice.rabbitMQ.listener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Listener RabbitMQ
@@ -42,24 +43,17 @@ public class QueueListener {
     /**
      * Найти свободного курьера
      */
-    @RabbitListener(queues = {"courier1", "courier2"})
+    @RabbitListener(queues = {"courier1"})
     public void findCouriers(String message) throws JsonProcessingException {
-        Long orderId = objectMapper.readValue(message, Long.class);
+        UUID orderId = objectMapper.readValue(message, UUID.class);
         List<Courier> couriers = courierRepository.findAllByStatus(CourierStatus.FREE);
         Order order = orderRepository.findById(orderId).orElseThrow();
         if (!couriers.isEmpty()) {
             Courier courier = findNearestCourier(couriers, order);
-            courier.setStatus(CourierStatus.ACTIVE);
-            courier.setPayment(BigDecimal.valueOf(500.0));
-            courierRepository.save(courier);
-            order.setStatus(OrderStatus.DELIVERY_PICKING);
-            order.setCourierId(courier);
-            order.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-            log.info("couriers found, assigning a courier to an order by id " + orderId);
+            System.out.println("Пришёл заказ № " + order.getId() + " для курьера № " + courier.getId() + ". Принять или отклонить заказ?");
         } else {
-            log.info("no couriers found");
+            log.warn("Свободных курьеров нет");
         }
-        orderRepository.save(order);
     }
 
     /**

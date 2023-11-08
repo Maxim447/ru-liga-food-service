@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "restaurants")
 public class Restaurant {
 

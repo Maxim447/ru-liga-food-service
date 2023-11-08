@@ -12,6 +12,7 @@ import java.util.List;
 public interface OrderMapper extends AbstractMapper<Order, OrderDTO> {
 
     @Mapping(source = "restaurantId.name", target = "customerRestaurantDTO.name")
+    @Mapping(source = "status", target = "status.orderAction")
     OrderDTO toDto(Order order);
 
     List<OrderDTO> toDto(List<Order> orders);

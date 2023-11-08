@@ -11,6 +11,4 @@ public interface RestaurantMenuItemMapper extends AbstractMapper<RestaurantMenuI
     @Mapping(source = "restaurantId.id", target = "restaurantId")
     RestaurantMenuItemsDTO toDto(RestaurantMenuItem restaurantMenuItem);
 
-    @Mapping(source = "restaurantId", target = "restaurantId.id")
-    RestaurantMenuItem toEntity(RestaurantMenuItemsDTO dto);
 }

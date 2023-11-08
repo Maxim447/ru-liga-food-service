@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "customers")
 public class Customer {

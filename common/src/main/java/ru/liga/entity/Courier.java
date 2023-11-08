@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "couriers")
 public class Courier {
 

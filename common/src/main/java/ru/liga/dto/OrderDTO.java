@@ -20,6 +20,9 @@ public class OrderDTO {
 
     private UUID id;
 
+    @JsonProperty("order_status")
+    private ActionDTO status;
+
     @JsonProperty("restaurant")
     private CustomerRestaurantDTO customerRestaurantDTO;
 

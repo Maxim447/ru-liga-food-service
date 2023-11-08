@@ -1,13 +1,6 @@
 server:
   port: 8083
 
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9000
-
 management:
   endpoints:
     web:
