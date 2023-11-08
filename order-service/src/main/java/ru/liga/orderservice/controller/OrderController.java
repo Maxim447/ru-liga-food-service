@@ -16,12 +16,13 @@ import ru.liga.orderservice.service.OrderService;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+import java.util.UUID;
 
 
 @Tag(name = "API для оформления заказов")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/orders")
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
 
@@ -53,13 +54,25 @@ public class OrderController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping("/{id}")
-    private ResponseEntity<?> gerOrdersById(@PathVariable Long id) {
+    private ResponseEntity<?> gerOrdersById(@PathVariable UUID id) {
         return orderService.getOrderById(id);
     }
 
     @Operation(summary = "Создать новый заказ")
     @PostMapping("/")
-    private OrderConfirmationDTO createOrder(@RequestBody OrderCreationDTO orderCreationDto) {
+    private ResponseEntity<?> createOrder(@RequestBody OrderCreationDTO orderCreationDto) {
         return orderService.createOrder(orderCreationDto);
+    }
+
+    @Operation(summary = "Оплатить заказ")
+    @PutMapping("/{id}/pay")
+    public ResponseEntity<?> pay(@PathVariable UUID id) {
+        return orderService.pay(id);
+    }
+
+    @Operation(summary = "Отменить заказ")
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<?> cancel(@PathVariable UUID id) {
+        return orderService.cancel(id);
     }
 }

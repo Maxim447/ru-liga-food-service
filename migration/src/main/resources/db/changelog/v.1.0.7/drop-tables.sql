@@ -1,0 +1,12 @@
+DROP TABLE order_items;
+DROP SEQUENCE order_items_seq;
+DROP TABLE restaurant_menu_items;
+DROP SEQUENCE restaurant_menu_items_seq;
+DROP TABLE orders;
+DROP SEQUENCE orders_seq;
+DROP TABLE customers;
+DROP SEQUENCE customer_seq;
+DROP TABLE couriers;
+DROP SEQUENCE couriers_seq;
+DROP TABLE restaurants;
+DROP SEQUENCE restaurants_seq;

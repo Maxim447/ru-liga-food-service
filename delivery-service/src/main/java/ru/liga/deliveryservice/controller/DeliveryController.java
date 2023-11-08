@@ -11,10 +11,14 @@ import ru.liga.dto.*;
 import ru.liga.deliveryservice.service.DeliveryService;
 import ru.liga.entity.enums.OrderStatus;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.UUID;
+
 @Tag(name = "API для отправки заказов курьерам")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/deliveries")
+@RequestMapping("/api/v1/delivery")
 public class DeliveryController {
 
     /**
@@ -22,17 +26,22 @@ public class DeliveryController {
      */
     private final DeliveryService deliveryService;
 
-    @Operation(summary = "Получить все доставки")
+    @Operation(summary = "Получение списка доступных заказов")
     @GetMapping("/")
-    public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(@RequestParam("status") OrderStatus status,
-            @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
-            @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
-        return deliveryService.getDeliveriesByStatus(status, PageRequest.of(pageIndex, pageCount));
+    public GetResponseDTO<DeliveryDTO> getDeliveriesByStatus(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer pageIndex,
+            @Positive @RequestParam(required = false, defaultValue = "10") Integer pageCount) {
+        return deliveryService.getDeliveriesByStatus(PageRequest.of(pageIndex, pageCount));
     }
 
-    @Operation(summary = "Обновить статус доставки по id")
-    @PostMapping("/{id}")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody ActionDTO actionDTO) {
-        return deliveryService.updateOrderStatus(id, actionDTO);
+    @Operation(summary = "Принять заказ")
+    @PostMapping("/{id}/take")
+    public ResponseEntity<?> take(@PathVariable UUID id) {
+        return deliveryService.take(id);
+    }
+
+    @Operation(summary = "Завершить заказ")
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<?> complete(@PathVariable UUID id) {
+        return deliveryService.complete(id);
     }
 }

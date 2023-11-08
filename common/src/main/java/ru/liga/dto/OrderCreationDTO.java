@@ -16,6 +16,9 @@ public class OrderCreationDTO {
     @JsonProperty("restaurant_id")
     private Long restaurantId;
 
+    @JsonProperty("customer_id")
+    private Long customerId;
+
     @JsonProperty("menu_items")
     private List<MenuItemsDTO> menuItems;
 }

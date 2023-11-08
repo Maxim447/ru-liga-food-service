@@ -17,6 +17,7 @@ import ru.liga.orderservice.repository.OrderRepository;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,10 +29,11 @@ public class OrderServiceTest {
 
     @Autowired
     private OrderRepository orderRepository;
+
     @Test
     public void testGetOrderById_ExistingOrder() {
 
-        Long orderId = 1L;
+        UUID orderId = null;
         Order order = orderRepository.getOrderById(orderId).orElseThrow();
         CustomerRestaurantDTO customerRestaurantDTO = new CustomerRestaurantDTO(order.getRestaurantId().getName());
         List<ItemsDTO> itemsDTOs = new ArrayList<>();
@@ -58,7 +60,8 @@ public class OrderServiceTest {
 
     @Test
     public void testGetOrderById_NonExistingOrder() {
-        ResponseEntity<?> responseEntity = orderService.getOrderById(0L);
+        UUID orderId = null;
+        ResponseEntity<?> responseEntity = orderService.getOrderById(orderId);
 
         assertEquals(204, responseEntity.getStatusCodeValue());
         assertNull(responseEntity.getBody());

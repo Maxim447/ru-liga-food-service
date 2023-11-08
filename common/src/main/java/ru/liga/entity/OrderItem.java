@@ -27,7 +27,7 @@ public class OrderItem {
     private Order orderId;
 
     @OneToOne
-    @JoinColumn(name = "restaurant_menu_item")
+    @JoinColumn(name = "restaurant_menu_item_id")
     private RestaurantMenuItem restaurantMenuItem;
 
     @Column(name = "price", nullable = false)

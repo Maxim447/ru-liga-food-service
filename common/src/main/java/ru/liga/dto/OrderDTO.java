@@ -9,7 +9,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 
 
 @Data
@@ -18,7 +18,7 @@ import java.util.List;
 @Schema(description = "DTO для получения заказа")
 public class OrderDTO {
 
-    private Long id;
+    private UUID id;
 
     @JsonProperty("restaurant")
     private CustomerRestaurantDTO customerRestaurantDTO;

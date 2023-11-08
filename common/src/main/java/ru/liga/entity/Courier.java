@@ -31,15 +31,9 @@ public class Courier {
     @Enumerated(EnumType.STRING)
     private CourierStatus status;
 
-    @Column(name = "coordinates", nullable = false)
-    private String coordinates;
-
     @Column(name = "longitude", nullable = false)
     private BigDecimal longitude;
 
     @Column(name = "latitude", nullable = false)
     private BigDecimal latitude;
-
-    @Column(name = "payment")
-    private BigDecimal payment;
 }

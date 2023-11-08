@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.UUID;
 
 
 @Data
@@ -15,7 +16,7 @@ import java.util.Date;
 @Schema(description = "DTO для ответа после создания заказа")
 public class OrderConfirmationDTO {
 
-    private Long id;
+    private UUID id;
 
     @JsonProperty("secret_payment_url")
     private String secretPaymentUrl;

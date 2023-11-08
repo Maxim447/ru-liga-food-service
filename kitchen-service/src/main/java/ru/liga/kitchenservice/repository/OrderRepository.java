@@ -7,8 +7,9 @@ import ru.liga.entity.Order;
 import ru.liga.entity.enums.OrderStatus;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, UUID> {
     List<Order> getOrdersByStatus(OrderStatus status, PageRequest pageRequest);
 }

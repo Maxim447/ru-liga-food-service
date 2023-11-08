@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.liga.entity.Order;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
-    Optional<Order> getOrderById(Long id);
+public interface OrderRepository extends JpaRepository<Order, UUID> {
+    Optional<Order> getOrderById(UUID id);
 }
